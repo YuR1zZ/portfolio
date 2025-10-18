@@ -214,12 +214,28 @@ body {
 }
 
 
-.gradient-text {
+.gaming-text {
     background: linear-gradient(to right,#9C27B0,#E91E63,#FFEB3B,#E91E63,#9C27B0,#E91E63,#FFEB3B);
     background-clip: text;
     -webkit-background-clip: text;
     background-size: 300% 300%;
     color : transparent;
     animation: rgbtext 5s linear infinite;
+  }
+
+
+  @keyframes  codingtext {
+  0% {background-position: 0% 50%;}
+  100% {background-position: 100% 50%;}
+}
+
+
+.coding-text {
+    background: linear-gradient(to right,#9E9E9E,gray,white,gray,white,gray,white);
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-size: 300% 300%;
+    color : transparent;
+    animation: codingtext 6s linear infinite;
   }
 
