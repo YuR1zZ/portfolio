@@ -1,9 +1,10 @@
+import CodingHeader from "../components/CodingHeader"
 
 
 const page = () => {
   return (
     <div>
-      <h1>coding</h1>
+      <CodingHeader />
     </div>
   )
 }
