@@ -28,7 +28,7 @@ export default function Home() {
   useEffect(() => {
     const pathSplit = new SplitText(".path", { type: "chars, words" });
     gsap.from(pathSplit.words, {
-      y:30,
+      y:-20,
       yoyo:true,
       duration:1,
     });
