@@ -1,8 +1,6 @@
-import GridBg from "./ui/GridBg"
 import Particles from "./ui/Particles"
 import SpotLight from "./ui/SpotLight"
 import { TextAnimate } from "./ui/TextBlur"
-import Tree from "./ui/Tree"
 
 const Hero = () => {
   return (
