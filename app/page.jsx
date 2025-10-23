@@ -18,9 +18,9 @@ export default function Home() {
   useEffect(() => {
     const welcomeSplit = new SplitText(".welcome", { type: "chars, words" });
     gsap.from(welcomeSplit.chars, {
-      y:-20,
+      y:20,
       yoyo:true,
-      duration:1,
+      duration:0.5,
     })
   }, []);
 
@@ -28,9 +28,11 @@ export default function Home() {
   useEffect(() => {
     const pathSplit = new SplitText(".path", { type: "chars, words" });
     gsap.from(pathSplit.words, {
-      y:-20,
+      opacity:0,
+      y:20,
       yoyo:true,
-      duration:1,
+      duration:0.5,
+      delay:.4,
     });
   }, []);
 
@@ -42,7 +44,8 @@ export default function Home() {
     },{
       opacity:1,
       x:0,
-      duration:1,
+      duration:0.5,
+      delay:1.3
     })
     gsap.fromTo('.coding-btn',{
       opacity:0,
@@ -50,7 +53,8 @@ export default function Home() {
     },{
       opacity:1,
       x:0,
-      duration:1,
+      duration:0.5,
+      delay:1.3
     })
   },[])
 

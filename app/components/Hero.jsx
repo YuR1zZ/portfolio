@@ -1,6 +1,7 @@
 import GridBg from "./ui/GridBg"
 import Particles from "./ui/Particles"
 import SpotLight from "./ui/SpotLight"
+import { TextAnimate } from "./ui/TextBlur"
 import Tree from "./ui/Tree"
 
 const Hero = () => {
@@ -18,9 +19,11 @@ const Hero = () => {
       </div>
   <SpotLight />
   <div className="relative flex flex-col items-center justify-center min-h-screen text-center">
-    <h1 className="text-5xl font-bold text-gray-200">
-      Transforming Concepts into Seamless <br />
-      <span className="coding-text">User Experiences</span>
+    <TextAnimate animation="blurIn" as="h1" className='text-5xl mb-3'>
+        hey, mohammad here.
+    </TextAnimate>
+    <h1 className="text-4xl font-bold text-gray-200 coding-text">
+      i Create good shii
     </h1>
   </div>
 </div>
