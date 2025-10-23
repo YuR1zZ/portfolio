@@ -45,7 +45,7 @@ export default function Home() {
       opacity:1,
       x:0,
       duration:0.5,
-      delay:1.3
+      delay:1
     })
     gsap.fromTo('.coding-btn',{
       opacity:0,
@@ -54,7 +54,7 @@ export default function Home() {
       opacity:1,
       x:0,
       duration:0.5,
-      delay:1.3
+      delay:1
     })
   },[])
 
