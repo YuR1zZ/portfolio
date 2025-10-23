@@ -12,7 +12,7 @@ const SpotLight = ({ className }) => {
       <div className="absolute left-[-30%] top-[-30%] h-[80%] w-[50%] rounded-full bg-blue-400/40 blur-[120px]" />
 
       {/* Purple light (right) */}
-      <div className="absolute right-[-20%] bottom-[-30%] h-[80%] w-[50%] rounded-full bg-fuchsia-700/40 blur-[120px]" />
+      <div className="absolute right-[-20%] bottom-[-30%] h-[80%] w-[50%] rounded-full bg-gray-700/40 blur-[120px]" />
     </div>
   );
 };

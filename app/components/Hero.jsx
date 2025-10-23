@@ -1,12 +1,14 @@
 import GridBg from "./ui/GridBg"
 import Particles from "./ui/Particles"
 import SpotLight from "./ui/SpotLight"
+import Tree from "./ui/Tree"
 
 const Hero = () => {
   return (
     
     <div className="relative w-full h-screen overflow-hidden flex items-center justify-center">
       <div className="absolute inset-0 z-0">
+        
         <Particles
           quantity={100}
           ease={80}
