@@ -3,7 +3,7 @@
 import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 
-const AnimatedArrow = () => {
+const AnimatedRightArrow = () => {
   const arrowRef = useRef(null);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const AnimatedArrow = () => {
   );
 };
 
-export default AnimatedArrow;
+export default AnimatedRightArrow;
 
 
 

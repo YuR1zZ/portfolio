@@ -5,7 +5,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/all";
 import Magnet from "./components/ui/Magnet";
-import AnimatedArrow from "./components/ui/Arrow";
+import AnimatedRightArrow from "./components/ui/RightArrow";
 import AnimateLeftdArrow from "./components/ui/LeftArrow";
 
 
@@ -96,7 +96,7 @@ export default function Home() {
           Coding
         </p>
       </button>
-      <AnimatedArrow />
+      <AnimatedRightArrow />
       </div>
       </Magnet>
 

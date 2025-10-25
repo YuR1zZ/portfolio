@@ -1,3 +1,4 @@
+import CodingCards from "../components/CodingCards"
 import CodingHeader from "../components/CodingHeader"
 import Hero from "../components/Hero"
 
@@ -7,6 +8,7 @@ const page = () => {
     <div>
       <CodingHeader />
       <Hero />
+      <CodingCards />
     </div>
   )
 }
