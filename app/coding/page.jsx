@@ -1,6 +1,6 @@
 import CodingCards from "../components/CodingCards"
 import CodingHeader from "../components/CodingHeader"
-import Hero from "../components/Hero"
+import Hero from "../components/CodingHero"
 
 
 const page = () => {

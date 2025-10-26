@@ -1,7 +1,7 @@
 import Image from "next/image"
 import { forwardRef } from "react"
 
-const Card = ({id,frontSrc,backText,frontAlt},ref) => {
+const Card = forwardRef(({id,frontSrc,backText,frontAlt},ref) => {
   return (
     <div className="card" id={id} ref={ref}>
         <div className="card-wrapper">
@@ -22,6 +22,6 @@ const Card = ({id,frontSrc,backText,frontAlt},ref) => {
         </div>
     </div>
   )
-}
+})
 
 export default Card
