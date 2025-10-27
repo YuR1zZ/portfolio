@@ -20,7 +20,12 @@ const CodingHeader = () => {
       </div>
       <div className='flex flex-row gap-x-5 items-center justify-center'>
             
-                <Magnet><Link href='/'>Home</Link></Magnet>
+                <Magnet>
+                  <button href="/" className="relative text-white font-medium overflow-hidden">
+                  <span className="underline-text relative z-10">Home</span>
+                  <span className="underline absolute left-1/2 -translate-x-1/2 bottom-0 w-0 h-[1px] bg-white"></span>
+                  </button>
+                </Magnet>
                 <Magnet><Link href='/about'>About</Link></Magnet>
                 <Magnet><Link href='/contact'>Contact</Link></Magnet>
             

@@ -96,7 +96,7 @@ const CodingCards = () => {
   }, []);
 
   return (
-    <div ref={container}>
+    <div ref={container} className="hidden md:block">
       <section className='hero'>
         <h3>Keep scrolling to <br /> reveal the cards</h3>
       </section>

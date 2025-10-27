@@ -1,6 +1,8 @@
 import Particles from "./ui/Particles"
 import SpotLight from "./ui/SpotLight"
 import { TextAnimate } from "./ui/TextBlur"
+import Magnet from "./ui/Magnet"
+import Button from "./ui/Button"
 
 const Hero = () => {
   return (
@@ -17,12 +19,13 @@ const Hero = () => {
       </div>
   <SpotLight />
   <div className="relative flex flex-col items-center justify-center min-h-screen text-center">
-    <TextAnimate animation="blurIn" as="h1" className='text-5xl mb-3'>
-        hey, mohammad here.
+    <TextAnimate animation="blurIn" as="h1" className='text-5xl mb-3 font-thin'>
+        hey, Mohammad here.
     </TextAnimate>
-    <h1 className="text-4xl font-bold text-gray-200 coding-text">
-      i Create good shii
+    <h1 className="text-4xl text-gray-200 coding-text font-thin">
+      i create good stuff
     </h1>
+    <Button />
   </div>
 </div>
 
