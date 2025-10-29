@@ -2,7 +2,7 @@ import Particles from "./ui/Particles"
 import SpotLight from "./ui/SpotLight"
 import { TextAnimate } from "./ui/TextBlur"
 import Magnet from "./ui/Magnet"
-import Button from "./ui/Button"
+import Button from "./ui/CodingButton"
 
 const Hero = () => {
   return (
