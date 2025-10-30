@@ -250,15 +250,15 @@ body {
 .coding-text {
   background: linear-gradient(
     90deg,
-    #afa18f,
+    white,
     gray,
     #bfbfbf,
     gray,
-    #afa18f,
+    white,
     gray,
     #bfbfbf,
     gray,
-    #afa18f
+    white
   );
   background-size: 300% 300%;
   background-clip: text;
@@ -449,9 +449,9 @@ h3 {
       width: 1000px;
       padding:40px;
     }
-    span{
-      color: #ec4e39;
-    }
+    /* span{
+      color: #bfbfbf;
+    } */
   }
 
   .mask{

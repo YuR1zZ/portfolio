@@ -1,13 +1,30 @@
+'use client'
+
 import Particles from "./ui/Particles"
 import SpotLight from "./ui/SpotLight"
 import { TextAnimate } from "./ui/TextBlur"
-import Magnet from "./ui/Magnet"
+import Lenis from "@studio-freight/lenis"
+import { useEffect, useState } from "react"
 import Button from "./ui/CodingButton"
 
+
 const Hero = () => {
+
+  useEffect(() => {
+      const lenis = new Lenis()
+      function raf(time) {
+        lenis.raf(time)
+        requestAnimationFrame(raf)
+      }
+      requestAnimationFrame(raf)
+      return () => lenis.destroy()
+    }, [])
+
   return (
     
+    
     <div className="relative w-full h-screen overflow-hidden flex items-center justify-center">
+      
       <div className="absolute inset-0 z-0">
         
         <Particles

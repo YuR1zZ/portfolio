@@ -30,7 +30,7 @@ const Introduction = () => {
       
 
       <div className='content'>
-        <p>I'm a <span>selectively skilled</span> product designer with strong focus on producing high quality & impactful digital experience.</p>
+        <p>I'm a <span className="coding-text">selectively skilled</span> product designer with strong focus on producing high quality & impactful digital experience.</p>
       </div>
 
     </main>

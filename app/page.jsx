@@ -1,12 +1,12 @@
 'use client'
-import { useEffect } from "react";
+import { useEffect , useState } from "react";
 import { useRouter } from "next/navigation";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/all";
 import Magnet from "./components/ui/Magnet";
-import AnimatedRightArrow from "./components/ui/RightArrow";
-import AnimateLeftdArrow from "./components/ui/LeftArrow";
+import Lenis from "@studio-freight/lenis";
+
 
 
 export default function Home() {
@@ -58,6 +58,15 @@ export default function Home() {
     })
   },[])
 
+  useEffect(() => {
+      const lenis = new Lenis()
+      function raf(time) {
+        lenis.raf(time)
+        requestAnimationFrame(raf)
+      }
+      requestAnimationFrame(raf)
+      return () => lenis.destroy()
+    }, [])
 
   return (
     <main>
@@ -76,7 +85,6 @@ export default function Home() {
 
       <Magnet>
         <div className="gaming-btn flex flex-row items-center justify-center">
-        <AnimateLeftdArrow />
       <button
        className="cursor-pointer"
        onClick={()=>router.push('/gaming')}
@@ -96,7 +104,6 @@ export default function Home() {
           Coding
         </p>
       </button>
-      <AnimatedRightArrow />
       </div>
       </Magnet>
 

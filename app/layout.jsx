@@ -1,5 +1,8 @@
+
+
 import { Afacad_Flux } from 'next/font/google'
 import "./globals.css";
+
 
 const afacadFlux = Afacad_Flux({
   subsets: ['latin'],
@@ -14,12 +17,16 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
+
+  
   return (
     <html lang="en">
       <body
         className={`${afacadFlux.variable} ${afacadFlux.variable} antialiased`}
       >
         {children}
+        
       </body>
     </html>
   );
