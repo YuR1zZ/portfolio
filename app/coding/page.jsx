@@ -1,6 +1,7 @@
 import CodingCards from "../components/CodingCards"
 import CodingHeader from "../components/CodingHeader"
 import Hero from "../components/CodingHero"
+import Introduction from "../components/Introduction"
 
 
 const page = () => {
@@ -8,7 +9,7 @@ const page = () => {
     <div>
       <CodingHeader />
       <Hero />
-      <CodingCards />
+      <Introduction />
     </div>
   )
 }

@@ -4,7 +4,6 @@
 
 
 
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -251,15 +250,15 @@ body {
 .coding-text {
   background: linear-gradient(
     90deg,
-    #9e9e9e,
+    #afa18f,
     gray,
-    white,
+    #bfbfbf,
     gray,
-    white,
+    #afa18f,
     gray,
-    white,
+    #bfbfbf,
     gray,
-    #9e9e9e
+    #afa18f
   );
   background-size: 300% 300%;
   background-clip: text;
@@ -411,7 +410,7 @@ h3 {
 
 
 .btn:hover span{
-  color: #f5efff;
+  color: #afa18f;
 }
 
 .btn::before{
@@ -428,6 +427,39 @@ h3 {
 }
 
 .btn:hover::before{
-    width: 300px;
+    width: 150px;
     height: 300px;
+}
+
+.intro-main{
+  height: 100vh;
+
+  .mask, .content{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #afa18f;
+    font-size: 64px;
+    line-height: 66px;
+    cursor: default;
+    
+    p{
+      width: 1000px;
+      padding:40px;
+    }
+    span{
+      color: #ec4e39;
+    }
+  }
+
+  .mask{
+    mask-image: url('/images/mask.svg');
+    mask-repeat: no-repeat;
+    mask-size: 40px;
+    background: #ec4e39;
+    position: absolute;
+    color: black;
+  }
 }

@@ -42,7 +42,7 @@ const Magnet = ({children}) => {
       }
 
       const mouseEnter = () => {
-        gsap.to(ref.current, { scale: 1.2, duration: 0.4, ease: 'power2.out' });
+        gsap.to(ref.current, { scale: 1, duration: 0.4, ease: 'power2.out' });
         if (underline) {
         gsap.to(underline, { width: '100%', duration: 0.4, ease: 'power2.out' });
         }

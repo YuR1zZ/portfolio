@@ -2,52 +2,45 @@
 
 import { useEffect } from 'react'
 import React from 'react'
-import Magnet from './Magnet'
 
 const Button = () => {
-
-    useEffect(() => {
-    const buttons = document.querySelectorAll(".btn");
+  useEffect(() => {
+    const buttons = document.querySelectorAll(".btn")
 
     buttons.forEach((btn) => {
       const handleMouseMove = (e) => {
-        const x = e.offsetX;
-        const y = e.offsetY;
-        const btnWidth = btn.clientWidth;
-        const btnHeight = btn.clientHeight;
-        const transX = x - btnWidth / 1.5;
-        const transY = y - btnHeight / 1.5;
-        btn.style.transform = `translateX(${transX}px) translateY(${transY}px)`;
+        const rect = btn.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const y = e.clientY - rect.top
 
-        const mx = e.pageX - btn.offsetLeft;
-        const my = e.pageY - btn.offsetTop;
-        btn.style.setProperty("--x", mx + "px");
-        btn.style.setProperty("--y", my + "px");
-      };
+        const transX = (x - rect.width / 2) / 4
+        const transY = (y - rect.height / 2) / 4
+
+        btn.style.transform = `translate(${transX}px, ${transY}px)`
+        btn.style.setProperty("--x", `${x}px`)
+        btn.style.setProperty("--y", `${y}px`)
+      }
 
       const handleMouseOut = () => {
-        btn.style.transform = "";
-      };
+        btn.style.transform = ""
+      }
 
-      btn.addEventListener("mousemove", handleMouseMove);
-      btn.addEventListener("mouseout", handleMouseOut);
+      btn.addEventListener("mousemove", handleMouseMove)
+      btn.addEventListener("mouseout", handleMouseOut)
 
-      // Cleanup listeners on unmount
       return () => {
-        btn.removeEventListener("mousemove", handleMouseMove);
-        btn.removeEventListener("mouseout", handleMouseOut);
-      };
-    });
-  }, []);
-
-
+        btn.removeEventListener("mousemove", handleMouseMove)
+        btn.removeEventListener("mouseout", handleMouseOut)
+      }
+    })
+  }, [])
 
   return (
-    
     <div>
-      <a href="#" className="btn" style={{ '--clr': 'grey' }}><span>Magic Button</span></a>
+      <a href="#" className="btn" style={{ '--clr': 'grey' }}>
+        <span>get in touch</span>
+      </a>
     </div>
-    
   )
 }
 
