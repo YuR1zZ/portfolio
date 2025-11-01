@@ -10,6 +10,7 @@ import Button from "./ui/CodingButton"
 
 const Hero = () => {
 
+
   useEffect(() => {
       const lenis = new Lenis()
       function raf(time) {
@@ -34,12 +35,12 @@ const Hero = () => {
           className="w-full h-full"
         />
       </div>
-  <SpotLight />
-  <div className="relative flex flex-col items-center justify-center min-h-screen text-center">
-    <TextAnimate animation="blurIn" as="h1" className='text-5xl text-[#afa18f] mb-3 font-thin'>
+  <SpotLight showBlue={false}/>
+  <div className="relative flex flex-col items-center justify-center min-h-screen text-center overflow-hidden">
+    <TextAnimate animation="blurIn" as="h1" className='text-5xl text-[#EEEEEE] mb-3 font-thin'>
         hey, Mohammad here.
     </TextAnimate>
-    <h1 className="text-4xl text-[#afa18f] coding-text font-thin">
+    <h1 className="text-4xl coding-text font-thin">
       i create good stuff
     </h1>
     <Button />

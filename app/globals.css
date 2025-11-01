@@ -33,12 +33,18 @@
   }
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 
@@ -410,7 +416,7 @@ h3 {
 
 
 .btn:hover span{
-  color: #afa18f;
+  color: #EEEEEE;
 }
 
 .btn::before{
@@ -440,7 +446,7 @@ h3 {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #afa18f;
+    color: #EEEEEE;
     font-size: 64px;
     line-height: 66px;
     cursor: default;

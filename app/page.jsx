@@ -5,7 +5,6 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/all";
 import Magnet from "./components/ui/Magnet";
-import Lenis from "@studio-freight/lenis";
 
 
 
@@ -40,33 +39,24 @@ export default function Home() {
   useGSAP(()=>{
     gsap.fromTo('.gaming-btn',{
       opacity:0,
-      x:-30,
+      y:30,
     },{
       opacity:1,
-      x:0,
+      y:0,
       duration:0.5,
-      delay:1
+      delay:0.6
     })
     gsap.fromTo('.coding-btn',{
       opacity:0,
-      x:30,
+      y:30,
     },{
       opacity:1,
-      x:0,
+      y:0,
       duration:0.5,
-      delay:1
+      delay:0.8
     })
   },[])
 
-  useEffect(() => {
-      const lenis = new Lenis()
-      function raf(time) {
-        lenis.raf(time)
-        requestAnimationFrame(raf)
-      }
-      requestAnimationFrame(raf)
-      return () => lenis.destroy()
-    }, [])
 
   return (
     <main>
