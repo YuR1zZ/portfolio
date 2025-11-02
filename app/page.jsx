@@ -5,6 +5,9 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/all";
 import Magnet from "./components/ui/Magnet";
+import GridBg from "./components/ui/GridBg";
+import SpotLight from "./components/ui/SpotLight";
+import PlanetSketch from "./components/ui/Planet";
 
 
 
@@ -58,13 +61,37 @@ export default function Home() {
   },[])
 
 
+  useEffect(() => {
+    
+  }, []);
+
+
+  useGSAP(()=>{
+    gsap.fromTo('.planet', {
+      opacity:0,
+    },{
+      opacity:1,
+      delay:1.2
+    })
+  })
+
+
   return (
     <main>
 
 
-    <div className="absolute flex flex-col items-center justify-center w-[100vw] h-[100vh] z-100 top-0 left-0 text-xl">
+    <div className="absolute flex flex-col items-center justify-center w-[100vw] h-[100vh] z-100 top-0 left-0 text-xl bg-black">
 
-    <div className="text-5xl mb-4 welcome">
+    <div className="absolute inset-0 z-0">
+      <SpotLight showBlue = {true} showGrey = {false} bluePosition="buttom"/>
+    </div>
+
+    <div className="relative scale-50 pointer-events-none animate-bounce-slow z-10 md:translate-y-50 md:translate-x-50 lg:translate-y-50 lg-translate-x-80 xl:translate-y-50 xl:translate-x-130 xl:scale-75 planet">
+    <PlanetSketch />
+    </div>
+
+    <div className="absolute flex flex-col items-center justify-center z-20">
+      <div className="text-5xl mb-4 welcome">
     <h1>Welcome</h1>
     </div>
     <div className="mb-4 text-3xl path">
@@ -98,11 +125,12 @@ export default function Home() {
       </Magnet>
 
       </div>
+    </div>
 
     </div>
 
 
-    <div className="gradient-bg blur-3xl h-screen">
+    {/* <div className="gradient-bg blur-3xl h-screen">
 
       <div className="gradient-container">
       
@@ -114,7 +142,7 @@ export default function Home() {
         <div className="interactive"></div>
 
       </div>
-    </div>
+    </div> */}
     </main>
   );
 }

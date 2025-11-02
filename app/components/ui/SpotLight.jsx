@@ -6,6 +6,7 @@ const SpotLight = ({
   showBlue = true,
   showGrey = true,
   greyPosition = "bottom", // can be "top" or "bottom"
+  bluePosition = "top", // can be "top" or "bottom"
 }) => {
   return (
     <div
@@ -15,8 +16,17 @@ const SpotLight = ({
       )}
     >
       {/* Blue light (left) */}
-      {showBlue && (
+      {/* {showBlue && (
         <div className="absolute left-[-30%] top-[-30%] h-[80%] w-[50%] rounded-full bg-blue-400/40 blur-[120px]" />
+      )} */}
+
+      {showBlue && (
+        <div
+          className={cn(
+            "absolute left-[25%] top-[-50%] h-[80%] w-[50%] rounded-full bg-blue-400/30 blur-[120px]",
+            bluePosition === "top" ? "top-[-30%]" : "bottom-[-30%]"
+          )}
+        />
       )}
 
       {/* Grey light (configurable position) */}
