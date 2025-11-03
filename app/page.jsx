@@ -71,7 +71,7 @@ export default function Home() {
       opacity:0,
     },{
       opacity:1,
-      delay:1.2
+      delay:0.5
     })
   })
 
@@ -80,25 +80,25 @@ export default function Home() {
     <main>
 
 
-    <div className="absolute flex flex-col items-center justify-center w-[100vw] h-[100vh] z-100 top-0 left-0 text-xl bg-black">
+    <div className="absolute flex flex-col items-center justify-center w-[100vw] h-[100vh] z-100 top-0 left-0 bg-black">
 
     <div className="absolute inset-0 z-0">
       <SpotLight showBlue = {true} showGrey = {false} bluePosition="buttom"/>
     </div>
 
-    <div className="relative scale-50 pointer-events-none animate-bounce-slow z-10 md:translate-y-50 md:translate-x-50 lg:translate-y-50 lg-translate-x-80 xl:translate-y-50 xl:translate-x-130 xl:scale-75 planet">
+    <div className="relative scale-[0.6] rotate-[40deg] pointer-events-none animate-bounce-slow z-10 -translate-y-60 sm:-translate-y-60 md:-translate-y-60 lg:-translate-y-60 xl:-translate-y-60 planet">
     <PlanetSketch />
     </div>
 
     <div className="absolute flex flex-col items-center justify-center z-20">
-      <div className="text-5xl mb-4 welcome">
+      <div className="text-5xl mb-4 welcome font-light">
     <h1>Welcome</h1>
     </div>
-    <div className="mb-4 text-3xl path">
+    <div className="mb-4 text-3xl path font-light">
     <p>Please Choose Your Path</p>
     </div>
 
-      <div className="flex flex-row gap-8 mt-15">
+      <div className="flex flex-row gap-8 mt-15 text-xl">
 
       <Magnet>
         <div className="gaming-btn flex flex-row items-center justify-center">

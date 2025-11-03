@@ -1,5 +1,3 @@
-
-
 import { Afacad_Flux } from 'next/font/google'
 import "./globals.css";
 
