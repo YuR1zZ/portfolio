@@ -36,7 +36,7 @@ export default function Home() {
     let body = [];
     phrase.split(" ").forEach( (word, i) => {
       const letters = splitLetters(word);
-      body.push(<p key={word + "_" + i} className='m-0 mr-[1.5vw] text-[3.5vw]'>{letters}</p>)
+      body.push(<p key={word + "_" + i} className='m-0 mr-[1.5vw] text-[5vw]'>{letters}</p>)
     })
     return body
   }
@@ -50,7 +50,12 @@ export default function Home() {
   }
 
   return (
-    <main ref={container} className='flex h-screen items-end justify-center mb-100vh text-white'>
+    <main ref={container} className='flex flex-col h-screen items-center justify-center text-white p-[40px]'>
+        <div className='coding-text mb-40'>
+            <h1 className="text-[5vw] mt-10 uppercase">
+        Who really am i ?!
+        </h1>
+        </div>
       <div ref={body} className='w-[90%] flex flex-wrap'>
         {
           splitWords(phrase)
