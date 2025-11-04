@@ -1,6 +1,6 @@
 'use client'
 
-import MouseEffect from "./ui/MouseEffect"
+
 
 
 

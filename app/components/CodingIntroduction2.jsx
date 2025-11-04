@@ -51,11 +51,8 @@ export default function Home() {
 
   return (
     <main ref={container} className='flex flex-col h-screen items-center justify-center text-white p-[40px]'>
-        <div className='coding-text mb-40'>
-            <h1 className="text-[5vw] mt-10 uppercase">
-        Who really am i ?!
-        </h1>
-        </div>
+        
+        
       <div ref={body} className='w-[90%] flex flex-wrap'>
         {
           splitWords(phrase)

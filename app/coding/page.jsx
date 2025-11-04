@@ -3,6 +3,7 @@ import Hero from "../components/CodingHero"
 import Introduction from "../components/CodingIntroduction"
 import CodingIntroduction2 from "../components/CodingIntroduction2"
 import CodingSpecialties from "../components/CodingSpecialties"
+import WhoAmI from "../components/WhoAmI"
 
 
 
@@ -12,7 +13,7 @@ const page = () => {
       <CodingHeader />
       <Hero />
       <Introduction />
-      <CodingSpecialties />
+      <WhoAmI />
       <CodingIntroduction2 />
       <CodingSpecialties />
     </div>

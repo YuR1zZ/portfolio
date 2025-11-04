@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 680 60" role="img" aria-labelledby="titleDesc">
+  <title id="titleDesc">WHO REALLY AM I?</title>
+
+  <style><![CDATA[
+    text {
+      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-weight: 800;
+      font-size: 65px;
+      letter-spacing: 3px;
+      fill: #ffffff;
+    }
+  ]]></style>
+
+  <text x="50%" y="60%" text-anchor="middle" dominant-baseline="middle">
+    WHO REALLY AM I?
+  </text>
+</svg>
