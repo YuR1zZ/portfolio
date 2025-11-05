@@ -1,3 +1,4 @@
+import CodingFooter from "../components/CodingFooter"
 import CodingHeader from "../components/CodingHeader"
 import Hero from "../components/CodingHero"
 import Introduction from "../components/CodingIntroduction"
@@ -13,9 +14,10 @@ const page = () => {
       <CodingHeader />
       <Hero />
       <Introduction />
+      <CodingSpecialties />
       <WhoAmI />
       <CodingIntroduction2 />
-      <CodingSpecialties />
+      <CodingFooter />
     </div>
   )
 }

@@ -50,7 +50,7 @@ export default function Home() {
   }
 
   return (
-    <main ref={container} className='flex flex-col h-screen text-white p-[40px] items-center justify-center overflow-hidden lg:mx-[15vw] xl:mx-[20vw] md:mx-[3vw] sm:mx-[1vw]'>
+    <main ref={container} className='flex flex-col h-screen text-[#EEEEEE] p-[40px] items-center justify-center overflow-hidden lg:mx-[15vw] xl:mx-[20vw] md:mx-[3vw] sm:mx-[1vw]'>
         
         
       <div ref={body} className='w-[90%] flex flex-wrap items-center justify-center'>
