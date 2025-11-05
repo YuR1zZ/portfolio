@@ -83,7 +83,11 @@ export default function Home() {
     <div className="absolute flex flex-col items-center justify-center w-[100vw] h-[100vh] z-100 top-0 left-0 bg-black">
 
     <div className="absolute inset-0 z-0">
-      <SpotLight showBlue = {true} showGrey = {false} bluePosition="buttom"/>
+      <SpotLight
+        lights={[
+        { color: "blue", position: "top-center" },
+        ]}
+      />
     </div>
 
     <div className="relative scale-[0.6] rotate-[40deg] pointer-events-none animate-bounce-slow z-10 -translate-y-60 sm:-translate-y-60 md:-translate-y-60 lg:-translate-y-60 xl:-translate-y-60 planet">

@@ -3,6 +3,8 @@
 import { useRef, useEffect } from 'react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import gsap from 'gsap';
+import SpotLight from './ui/SpotLight';
+
 gsap.registerPlugin(ScrollTrigger);
 
 const phrase = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.";
@@ -50,7 +52,13 @@ export default function Home() {
   }
 
   return (
-    <main ref={container} className='flex flex-col h-screen text-[#EEEEEE] p-[40px] items-center justify-center overflow-hidden lg:mx-[15vw] xl:mx-[20vw] md:mx-[3vw] sm:mx-[1vw]'>
+    <main ref={container} className='flex flex-col h-screen text-[#EEEEEE] p-[40px] items-center justify-center overflow-hidden lg:px-[15vw] xl:px-[20vw] md:px-[3vw] sm:px-[1vw] relative'>
+
+      <SpotLight
+        lights={[
+        { color: "gray", position: "bottom-right" },
+        ]}
+      />
         
         
       <div ref={body} className='w-[90%] flex flex-wrap items-center justify-center'>

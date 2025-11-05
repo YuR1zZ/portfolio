@@ -1,13 +1,38 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 
-const SpotLight = ({
-  className,
-  showBlue = true,
-  showGrey = true,
-  greyPosition = "bottom", // can be "top" or "bottom"
-  bluePosition = "top", // can be "top" or "bottom"
-}) => {
+/**
+ * SpotLight component
+ * Supports multiple colored light spots positioned anywhere.
+ *
+ * @example
+ * <SpotLight
+ *   lights={[
+ *     { color: "blue", position: "top-left" },
+ *     { color: "gray", position: "bottom-right" },
+ *     { color: "gray", position: "top-right" },
+ *   ]}
+ * />
+ */
+const SpotLight = ({ className, lights = [] }) => {
+  // A simple map of position → Tailwind classes
+  const positionClasses = {
+    "top-left": "top-[-30%] left-[-30%]",
+    "top-right": "top-[-30%] right-[-30%]",
+    "bottom-left": "bottom-[-30%] left-[-30%]",
+    "bottom-right": "bottom-[-30%] right-[-30%]",
+    "top-center": "top-[-50%] left-[25%]",
+    "bottom-center": "bottom-[-70%] left-[25%]",
+  };
+
+  // Color map (adjust opacity & blur if desired)
+  const colorClasses = {
+    blue: "bg-blue-400/25",
+    gray: "bg-gray-700/40",
+    red: "bg-red-400/30",
+    green: "bg-green-400/30",
+  };
+
   return (
     <div
       className={cn(
@@ -15,29 +40,16 @@ const SpotLight = ({
         className
       )}
     >
-      {/* Blue light (left) */}
-      {/* {showBlue && (
-        <div className="absolute left-[-30%] top-[-30%] h-[80%] w-[50%] rounded-full bg-blue-400/40 blur-[120px]" />
-      )} */}
-
-      {showBlue && (
+      {lights.map((light, i) => (
         <div
+          key={i}
           className={cn(
-            "absolute left-[25%] top-[-50%] h-[80%] w-[50%] rounded-full bg-blue-400/30 blur-[120px]",
-            bluePosition === "top" ? "top-[-30%]" : "bottom-[-30%]"
+            "absolute h-[80%] w-[50%] rounded-full blur-[120px]",
+            colorClasses[light.color] || "bg-gray-700/30",
+            positionClasses[light.position] || "bottom-[-50%] right-[-20%]"
           )}
         />
-      )}
-
-      {/* Grey light (configurable position) */}
-      {showGrey && (
-        <div
-          className={cn(
-            "absolute right-[-20%] h-[80%] w-[50%] rounded-full bg-gray-700/40 blur-[120px]",
-            greyPosition === "top" ? "top-[-30%]" : "bottom-[-30%]"
-          )}
-        />
-      )}
+      ))}
     </div>
   );
 };

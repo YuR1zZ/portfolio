@@ -35,7 +35,11 @@ const Hero = () => {
           className="w-full h-full"
         />
       </div>
-  <SpotLight showBlue={false}/>
+     <SpotLight
+    lights={[
+      { color: "gray", position: "bottom-right" },
+      ]}
+    />
   <div className="relative flex flex-col items-center justify-center min-h-screen text-center overflow-hidden">
     <TextAnimate animation="blurIn" as="h1" className='text-5xl text-[#EEEEEE] mb-3 font-thin'>
         hey, Mohammad here.

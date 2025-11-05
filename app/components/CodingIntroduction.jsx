@@ -14,7 +14,11 @@ const Introduction = () => {
   return (
     
     <main className='intro-main relative overflow-hidden'>
-        <SpotLight showBlue = {false} showGrey = {true} greyPosition="top"/>
+      <SpotLight
+        lights={[
+        { color: "gray", position: "top-right" },
+        ]}
+      />
       <motion.div 
         className='mask'
         animate={{

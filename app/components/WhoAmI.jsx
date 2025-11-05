@@ -3,6 +3,8 @@
 import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { useEffect } from "react"
+import SpotLight from "./ui/SpotLight"
+
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -63,14 +65,20 @@ useEffect(() => {
     
 
   return (
-    <main className='m-0 p-0 box-border'>
+    <main className='m-0 p-0 box-border relative overflow-hidden'>
+      
         <section className='whoami-container h-screen '>
+          <SpotLight
+        lights={[
+        { color: "gray", position: "top-left" },
+        ]}
+      />
             <div className='whoami-header'><img src='/images/whoami.svg'/></div>
             <div className='whoami-header'><img src='/images/whoami.svg'/></div>
             <div className='whoami-header'><img src='/images/whoami.svg'/></div>
         </section>
         <section className="h-[100vh]">
-
+        
         </section>
     </main>
   )
