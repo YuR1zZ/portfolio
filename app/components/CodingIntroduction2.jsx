@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import gsap from 'gsap';
 gsap.registerPlugin(ScrollTrigger);
 
-const phrase = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters.";
+const phrase = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.";
 
 export default function Home() {
 
@@ -23,7 +23,7 @@ export default function Home() {
         scrollTrigger: {
             trigger: container.current,
             scrub: true,
-            start: `top`,
+            start: `top center`,
             end: `+=${window.innerHeight / 1.5}`,
         },
         opacity: 1,
@@ -36,7 +36,7 @@ export default function Home() {
     let body = [];
     phrase.split(" ").forEach( (word, i) => {
       const letters = splitLetters(word);
-      body.push(<p key={word + "_" + i} className='m-0 mr-[1.5vw] text-[5vw]'>{letters}</p>)
+      body.push(<p key={word + "_" + i} className='m-0 mr-[1.3vw] text-[64px] leading-[1.1]'>{letters}</p>)
     })
     return body
   }
@@ -50,10 +50,10 @@ export default function Home() {
   }
 
   return (
-    <main ref={container} className='flex flex-col h-screen items-center justify-center text-white p-[40px]'>
+    <main ref={container} className='flex flex-col h-screen text-white p-[40px] items-center justify-center overflow-hidden lg:mx-[15vw] xl:mx-[20vw] md:mx-[3vw] sm:mx-[1vw]'>
         
         
-      <div ref={body} className='w-[90%] flex flex-wrap'>
+      <div ref={body} className='w-[90%] flex flex-wrap items-center justify-center'>
         {
           splitWords(phrase)
         }

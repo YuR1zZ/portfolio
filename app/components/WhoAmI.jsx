@@ -63,8 +63,8 @@ useEffect(() => {
     
 
   return (
-    <main className=' m-0 p-0 box-border'>
-        <section className='whoami-container h-screen'>
+    <main className='m-0 p-0 box-border'>
+        <section className='whoami-container h-screen '>
             <div className='whoami-header'><img src='/images/whoami.svg'/></div>
             <div className='whoami-header'><img src='/images/whoami.svg'/></div>
             <div className='whoami-header'><img src='/images/whoami.svg'/></div>
