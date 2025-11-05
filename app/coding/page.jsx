@@ -4,7 +4,7 @@ import Hero from "../components/CodingHero"
 import Introduction from "../components/CodingIntroduction"
 import CodingIntroduction2 from "../components/CodingIntroduction2"
 import CodingSpecialties from "../components/CodingSpecialties"
-import WhoAmI from "../components/WhoAmI"
+import WhoAmI from "../components/CodingWhoAmI"
 
 
 
