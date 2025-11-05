@@ -1,21 +1,19 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 
-/**
- * SpotLight component
- * Supports multiple colored light spots positioned anywhere.
- *
- * @example
- * <SpotLight
- *   lights={[
- *     { color: "blue", position: "top-left" },
- *     { color: "gray", position: "bottom-right" },
- *     { color: "gray", position: "top-right" },
- *   ]}
- * />
- */
+
+// usage example
+
+//   <SpotLight
+//     lights={[
+//       { color: "blue", position: "top-left" },
+//       { color: "gray", position: "bottom-right" },
+//       { color: "gray", position: "top-right" },
+//     ]}
+//  />
+
 const SpotLight = ({ className, lights = [] }) => {
-  // A simple map of position → Tailwind classes
+
   const positionClasses = {
     "top-left": "top-[-30%] left-[-30%]",
     "top-right": "top-[-30%] right-[-30%]",
@@ -25,7 +23,7 @@ const SpotLight = ({ className, lights = [] }) => {
     "bottom-center": "bottom-[-70%] left-[25%]",
   };
 
-  // Color map (adjust opacity & blur if desired)
+
   const colorClasses = {
     blue: "bg-blue-400/25",
     gray: "bg-gray-700/40",
