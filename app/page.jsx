@@ -1,13 +1,13 @@
 'use client'
-import { useEffect , useState } from "react";
+import { useEffect  } from "react";
 import { useRouter } from "next/navigation";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/all";
 import Magnet from "./components/ui/Magnet";
-import GridBg from "./components/ui/GridBg";
 import SpotLight from "./components/ui/SpotLight";
-import PlanetSketch from "./components/ui/Planet";
+import { LightRays } from "./components/ui/LightRay";
+
 
 
 
@@ -61,19 +61,6 @@ export default function Home() {
   },[])
 
 
-  useEffect(() => {
-    
-  }, []);
-
-
-  useGSAP(()=>{
-    gsap.fromTo('.planet', {
-      opacity:0,
-    },{
-      opacity:1,
-      delay:0.5
-    })
-  })
 
 
   return (
@@ -82,17 +69,16 @@ export default function Home() {
 
     <div className="absolute flex flex-col items-center justify-center w-[100vw] h-[100vh] z-100 top-0 left-0 bg-black">
 
-    <div className="absolute inset-0 z-0">
+    {/* <div className="absolute inset-0 z-0">
       <SpotLight
         lights={[
         { color: "blue", position: "top-center" },
         ]}
       />
-    </div>
+    </div> */}
 
-    <div className="relative scale-[0.6] rotate-[40deg] pointer-events-none animate-bounce-slow z-10 -translate-y-60 sm:-translate-y-60 md:-translate-y-60 lg:-translate-y-60 xl:-translate-y-60 planet">
-    <PlanetSketch />
-    </div>
+    <LightRays />
+
 
     <div className="absolute flex flex-col items-center justify-center z-20">
       <div className="text-5xl mb-4 welcome font-light">
