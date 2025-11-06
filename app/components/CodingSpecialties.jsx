@@ -16,7 +16,7 @@ const CodingSpecialties = () => {
       />
       {/* <MouseEffect /> */}
       <div>
-        <h1 className='text-[4.5vw] text-center text-white p-10'>Specialties</h1>
+        <img src="/images/specialties.svg" alt="" />
       </div>
     </main>
   )
