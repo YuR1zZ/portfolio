@@ -22,7 +22,7 @@ export default function Home() {
     gsap.from(welcomeSplit.chars, {
       y:20,
       yoyo:true,
-      duration:0.5,
+      duration:0.3,
     })
   }, []);
 
@@ -33,8 +33,8 @@ export default function Home() {
       opacity:0,
       y:20,
       yoyo:true,
-      duration:0.5,
-      delay:.4,
+      duration:.3,
+      delay:.3,
     });
   }, []);
 
@@ -46,8 +46,8 @@ export default function Home() {
     },{
       opacity:1,
       y:0,
-      duration:0.5,
-      delay:0.6
+      duration:0.3,
+      delay:0.5
     })
     gsap.fromTo('.coding-btn',{
       opacity:0,
@@ -55,8 +55,8 @@ export default function Home() {
     },{
       opacity:1,
       y:0,
-      duration:0.5,
-      delay:0.8
+      duration:0.4,
+      delay:0.6
     })
   },[])
 
