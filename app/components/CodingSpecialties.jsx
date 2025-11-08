@@ -16,7 +16,7 @@ const CodingSpecialties = () => {
       />
       {/* <MouseEffect /> */}
       <div>
-        <img src="/images/specialties.svg" alt="" />
+        <img src="/images/specialties.png" alt="" />
       </div>
     </main>
   )
