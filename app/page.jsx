@@ -22,7 +22,8 @@ export default function Home() {
     gsap.from(welcomeSplit.chars, {
       y:20,
       yoyo:true,
-      duration:0.3,
+      duration:0.7,
+      ease:'power3.out',
     })
   }, []);
 
@@ -33,8 +34,9 @@ export default function Home() {
       opacity:0,
       y:20,
       yoyo:true,
-      duration:.3,
+      duration:.7,
       delay:.3,
+      ease:'power3.out',
     });
   }, []);
 
@@ -46,8 +48,9 @@ export default function Home() {
     },{
       opacity:1,
       y:0,
-      duration:0.3,
-      delay:0.5
+      duration:0.6,
+      delay:0.5,
+      ease:'power3.out',
     })
     gsap.fromTo('.coding-btn',{
       opacity:0,
@@ -55,8 +58,9 @@ export default function Home() {
     },{
       opacity:1,
       y:0,
-      duration:0.4,
-      delay:0.6
+      duration:0.6,
+      delay:0.6,
+      ease:'power3.out',
     })
   },[])
 
