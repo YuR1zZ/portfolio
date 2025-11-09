@@ -172,11 +172,15 @@ const Page = () => {
   return (
     <main className="m-0 p-0 box-border relative">
 
-      <section className='flex justify-center items-center mt-20 md:opacity-0 sm:opacity-0'>
-        <div >
-          <h1 className='text-2xl'>Keep Scrolling</h1>
+      <section className='relative flex justify-center items-center mt-20'>
+        <div className='block lg:hidden'>
+          <h1 className='text-3xl text-[#EEEEEE]'>Specialties</h1>
+        </div>
+        <div className='hidden lg:block'>
+          <h1 className='text-2xl text-[#EEEEEE]'>Keep Scrolling</h1>
         </div>
       </section>
+
 
       <section className="sticky" id='cards-sections'>
         <div className="card-container" ref={cardContainerRef}>
@@ -186,7 +190,7 @@ const Page = () => {
             </div>
             <div className="card-back">
               <span>( 01 )</span>
-              <p>Interactive web experiences</p>
+              <p className='text-2xl text-[#EEEEEE]'>NEXTJS,REACTJS</p>
             </div>
           </div>
 
@@ -196,7 +200,7 @@ const Page = () => {
             </div>
             <div className="card-back">
               <span>( 02 )</span>
-              <p>Interactive web experiences</p>
+              <p className='text-2xl text-[#EEEEEE]'>TailwindCSS</p>
             </div>
           </div>
 
@@ -206,7 +210,7 @@ const Page = () => {
             </div>
             <div className="card-back">
               <span>( 03 )</span>
-              <p>Interactive web experiences</p>
+              <p className='text-2xl text-[#EEEEEE]'>GSAP</p>
             </div>
           </div>
         </div>
