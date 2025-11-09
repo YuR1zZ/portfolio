@@ -9,23 +9,6 @@ import SpotLight from './ui/SpotLight'
 const Page = () => {
   const cardContainerRef = useRef(null)
 
-  // Smooth scrolling setup
-  useEffect(() => {
-    const lenis = new Lenis()
-    let rafId
-
-    const raf = (time) => {
-      lenis.raf(time)
-      rafId = requestAnimationFrame(raf)
-    }
-
-    rafId = requestAnimationFrame(raf)
-
-    return () => {
-      cancelAnimationFrame(rafId)
-      lenis.destroy()
-    }
-  }, [])
 
   // GSAP + ScrollTrigger animations
   useEffect(() => {
@@ -48,8 +31,8 @@ const Page = () => {
         cards.forEach((card) => {
           gsap.from(card, {
             scrollTrigger: {
-              trigger: card,        // each card triggers individually
-              start: 'top 90%',     // when top of card reaches 90% of viewport
+              trigger: card,
+              start: 'top 90%',
               toggleActions: 'play none none none',
             },
             y: 50,
@@ -175,7 +158,9 @@ const Page = () => {
       resizeTimer = setTimeout(initAnimation, 250)
     }
 
-    window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', ()=>{
+      ScrollTrigger.refresh();
+    })
 
     return () => {
       window.removeEventListener('resize', handleResize)
@@ -187,8 +172,8 @@ const Page = () => {
   return (
     <main className="m-0 p-0 box-border relative">
 
-      <section className='flex justify-center items-center mt-20'>
-        <div>
+      <section className='flex justify-center items-center mt-20 md:opacity-0 sm:opacity-0'>
+        <div >
           <h1 className='text-2xl'>Keep Scrolling</h1>
         </div>
       </section>

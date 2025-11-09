@@ -15,14 +15,24 @@ const Hero = () => {
 
 
   useEffect(() => {
-      const lenis = new Lenis()
-      function raf(time) {
-        lenis.raf(time)
-        requestAnimationFrame(raf)
-      }
-      requestAnimationFrame(raf)
-      return () => lenis.destroy()
-    }, [])
+  const lenis = new Lenis()
+
+  lenis.scrollTo(0, { immediate: true })
+
+  let rafId
+  const raf = (time) => {
+    lenis.raf(time)
+    rafId = requestAnimationFrame(raf)
+  }
+
+  rafId = requestAnimationFrame(raf)
+
+  return () => {
+    cancelAnimationFrame(rafId)
+    lenis.destroy()
+  }
+}, [])
+
 
 
     useGSAP(()=>{

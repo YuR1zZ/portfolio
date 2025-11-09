@@ -436,7 +436,6 @@ body {
   width: 75%;
   display: flex;
   perspective: 1000px;
-  transform: translateY(40px);
   will-change: width;
 }
 
