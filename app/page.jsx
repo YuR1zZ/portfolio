@@ -7,6 +7,7 @@ import { SplitText } from "gsap/all";
 import Magnet from "./components/ui/Magnet";
 import SpotLight from "./components/ui/SpotLight";
 import { LightRays } from "./components/ui/LightRay";
+import { BackgroundBeams } from "./components/ui/BgBeams";
 
 
 
@@ -17,34 +18,10 @@ export default function Home() {
   const router = useRouter();
 
 
-  useEffect(() => {
-    const welcomeSplit = new SplitText(".welcome", { type: "chars, words" });
-    gsap.from(welcomeSplit.chars, {
-      y:20,
-      yoyo:true,
-      duration:0.7,
-      ease:'power3.out',
-    })
-  }, []);
-
-
-  useEffect(() => {
-    const pathSplit = new SplitText(".path", { type: "chars, words" });
-    gsap.from(pathSplit.words, {
-      opacity:0,
-      y:20,
-      yoyo:true,
-      duration:.7,
-      delay:.3,
-      ease:'power3.out',
-    });
-  }, []);
-
-
   useGSAP(()=>{
     gsap.fromTo('.gaming-btn',{
       opacity:0,
-      y:30,
+      y:20,
     },{
       opacity:1,
       y:0,
@@ -54,12 +31,31 @@ export default function Home() {
     })
     gsap.fromTo('.coding-btn',{
       opacity:0,
-      y:30,
+      y:20,
     },{
       opacity:1,
       y:0,
       duration:0.6,
       delay:0.6,
+      ease:'power3.out',
+    })
+    gsap.fromTo('.path',{
+      opacity:0,
+      y:15,
+    },{
+      opacity:1,
+      y:0,
+      duration:0.7,
+      delay:0.3,
+      ease:'power3.out',
+    })
+    gsap.fromTo('.welcome',{
+      opacity:0,
+      y:15,
+    },{
+      opacity:1,
+      y:0,
+      duration:0.7,
       ease:'power3.out',
     })
   },[])
@@ -83,13 +79,16 @@ export default function Home() {
 
     <LightRays />
 
+    <BackgroundBeams className="absolute inset-0 z-0" />
+    
+
 
     <div className="absolute flex flex-col items-center justify-center z-20">
       <div className="text-5xl mb-4 welcome font-light">
-    <h1>Welcome</h1>
+    <h1 className="bg-gradient-to-b from-gray-600 to-white bg-clip-text text-transparent">Welcome</h1>
     </div>
-    <div className="mb-4 text-3xl path font-light">
-    <p>Please Choose Your Path</p>
+    <div className="mb-4 text-3xl path font-light ">
+      <p className="bg-gradient-to-b from-gray-600 to-white bg-clip-text text-transparent">Please Choose Your Path</p>
     </div>
 
       <div className="flex flex-row gap-8 mt-15 text-xl">
@@ -137,6 +136,7 @@ export default function Home() {
 
       </div>
     </div> */}
+
     </main>
   );
 }

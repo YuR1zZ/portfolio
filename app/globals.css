@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @tailwind utilities;
-@plugin "daisyui";
 
 
 
@@ -287,14 +286,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 200px;
-  padding: 15px;
+  width: 200px !important;
+  padding: 25px;
   border-radius: 50px;
   backdrop-filter: invert(10%);
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   text-decoration: none;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.05em;
   cursor: pointer;
   transition: transform 0.1s;

@@ -2,6 +2,10 @@
 
 import SpotLight from "./ui/SpotLight"
 import { useRef , useEffect } from "react"
+import { RiArrowRightUpLine } from "react-icons/ri";
+import Button from "./ui/CodingButton";
+import Magnet from './ui/Magnet';
+
 
 const CodingFooter = () => {
 
@@ -67,6 +71,15 @@ const CodingFooter = () => {
         ]}
       />
 
+      <div className="absolute flex items-center justify-center mt-[-300px]">
+        
+        <h1 className="p-3 text-3xl bg-gradient-to-b from-gray-600 to-white bg-clip-text text-transparent">
+          Let's Work Together
+        </h1>
+
+        <RiArrowRightUpLine />
+      </div>
+
       <div className='line-container'>
         <div className='line-body'>
             <div className='line'>
@@ -78,7 +91,60 @@ const CodingFooter = () => {
         </div>
     </div>
 
-        
+    <div className="absolute flex flex-col items-center justify-center mt-[300px]">
+      {/* Email Button */}
+      <Button href="mailto:panahim257@gmail.com">
+        Email
+      </Button>
+
+      {/* Row of buttons under Email */}
+      <div className="flex flex-row gap-5 mt-10">
+        <Magnet>
+      <button
+        onClick={() => window.open("https://instagram.com/yourprofile", "_blank")}
+        className="text-[#EEEEEE] font-medium overflow-hidden relative"
+      >
+        <span className="underline-text relative z-10">Instagram</span>
+        <span className="underline absolute left-1/2 -translate-x-1/2 bottom-0 w-0 h-[1px] bg-[#EEEEEE]"></span>
+      </button>
+    </Magnet>
+
+
+    <Magnet>
+      <button
+        onClick={() => window.open("https://instagram.com/yourprofile", "_blank")}
+        className="text-[#EEEEEE] font-medium overflow-hidden relative"
+      >
+        <span className="underline-text relative z-10">Linkedin</span>
+        <span className="underline absolute left-1/2 -translate-x-1/2 bottom-0 w-0 h-[1px] bg-[#EEEEEE]"></span>
+      </button>
+    </Magnet>
+
+
+    <Magnet>
+      <button
+        onClick={() => window.open("https://instagram.com/yourprofile", "_blank")}
+        className="text-[#EEEEEE] font-medium overflow-hidden relative"
+      >
+        <span className="underline-text relative z-10">Github</span>
+        <span className="underline absolute left-1/2 -translate-x-1/2 bottom-0 w-0 h-[1px] bg-[#EEEEEE]"></span>
+      </button>
+    </Magnet>
+
+
+    <Magnet>
+      <button
+        onClick={() => window.open("https://instagram.com/yourprofile", "_blank")}
+        className="text-[#EEEEEE] font-medium overflow-hidden relative"
+      >
+        <span className="underline-text relative z-10">Telegram</span>
+        <span className="underline absolute left-1/2 -translate-x-1/2 bottom-0 w-0 h-[1px] bg-[#EEEEEE]"></span>
+      </button>
+    </Magnet>
+
+    </div>
+  </div>
+
     </main>
   )
 }

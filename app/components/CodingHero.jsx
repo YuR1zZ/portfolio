@@ -75,7 +75,9 @@ const Hero = () => {
     <h1 className="text-4xl coding-text font-thin">
       i create good stuff
     </h1>
-    <Button />
+    <Button>
+      Get it Touch
+    </Button>
   </div>
 </div>
 
