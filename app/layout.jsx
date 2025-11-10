@@ -1,5 +1,8 @@
+
+
 import { Afacad_Flux } from 'next/font/google'
 import "./globals.css";
+import Script from 'next/script';
 
 
 const afacadFlux = Afacad_Flux({
@@ -20,6 +23,22 @@ export default function RootLayout({ children }) {
   
   return (
     <html lang="en">
+
+      <head>
+        {/* Other head content */}
+        <Script id="reload-on-resize" strategy="afterInteractive">
+          {`
+            let resizeTimer;
+            window.addEventListener("resize", () => {
+              clearTimeout(resizeTimer);
+              resizeTimer = setTimeout(() => {
+                location.reload();
+              }, 500);
+            });
+          `}
+        </Script>
+      </head>
+
       <body
         className={`${afacadFlux.variable} ${afacadFlux.variable} antialiased`}
       >

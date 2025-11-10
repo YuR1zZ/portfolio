@@ -68,9 +68,9 @@ export default function Home() {
 
 
   return (
+
+
     <main>
-
-
     <div className="absolute flex flex-col items-center justify-center w-[100vw] h-[100vh] z-100 top-0 left-0 bg-black">
 
     {/* <div className="absolute inset-0 z-0">
