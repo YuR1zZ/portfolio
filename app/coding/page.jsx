@@ -1,8 +1,9 @@
 
+import Introduction2 from "./components/CodingAbout"
 import CodingHeader from "./components/CodingHeader"
 import Hero from "./components/CodingHero"
 import Introduction from "./components/CodingIntroduction"
-import CodingIntroduction2 from "./about/page"
+
 import CodingSpecialties from "./components/CodingSpecialties"
 import WhoAmI from "./components/CodingWhoAmI"
 import CodingFooter from "./footer/page"
@@ -17,7 +18,7 @@ const page = () => {
       <Introduction />
       <CodingSpecialties />
       <WhoAmI />
-      <CodingIntroduction2 />
+      <Introduction2 />
       <CodingFooter />
     </div>
   )
