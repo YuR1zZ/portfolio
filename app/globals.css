@@ -53,7 +53,7 @@ body {
 }
 
 
-@keyframes  rgbtext{
+/* @keyframes  rgbtext{
   0%{
     background-position: '0% 50%';
   }
@@ -223,7 +223,7 @@ body {
 @keyframes  rgbtext {
   0% {background-position: 0% 50%;}
   100% {background-position: 100% 50%;}
-}
+} */
 
 
 .gaming-text {
@@ -581,3 +581,26 @@ body {
   height: 150px;
   top: -75px;
 }
+
+
+/* coding transition  */
+
+.transition-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100svh;
+  display: flex;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.block {
+  flex: 1;
+  height: 100%;
+  background-color: #222;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+

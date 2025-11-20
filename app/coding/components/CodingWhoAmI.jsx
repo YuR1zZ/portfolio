@@ -3,7 +3,7 @@
 import gsap from "gsap"
 import ScrollTrigger from "gsap/ScrollTrigger"
 import { useEffect } from "react"
-import SpotLight from "./ui/SpotLight"
+import SpotLight from "../../components/ui/SpotLight"
 
 
 gsap.registerPlugin(ScrollTrigger)

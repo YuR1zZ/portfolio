@@ -3,13 +3,14 @@
 import { useRef, useEffect } from 'react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import gsap from 'gsap';
-import SpotLight from './ui/SpotLight';
+import SpotLight from '../../components/ui/SpotLight';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
 const phrase = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.";
 
-export default function Home() {
+const Introduction2 = ()=> {
 
   let refs = useRef([]);
   const body = useRef(null);
@@ -70,3 +71,5 @@ export default function Home() {
     </main>
   )
 }
+
+export default Introduction2

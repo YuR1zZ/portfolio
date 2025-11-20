@@ -8,6 +8,7 @@ import Magnet from "./components/ui/Magnet";
 import SpotLight from "./components/ui/SpotLight";
 import { LightRays } from "./components/ui/LightRay";
 import { BackgroundBeams } from "./components/ui/BgBeams";
+import Link from "next/link";
 
 
 
@@ -84,40 +85,36 @@ export default function Home() {
 
 
     <div className="absolute flex flex-col items-center justify-center z-20">
-      <div className="text-5xl mb-4 welcome font-light">
-    <h1 className="bg-gradient-to-b from-gray-600 to-white bg-clip-text text-transparent">Welcome</h1>
+      <div className="text-5xl mb-7 welcome">
+    <h1 className="bg-gradient-to-b from-gray-600 to-white bg-clip-text text-transparent uppercase leading-none font-thin
+  ">Welcome</h1>
     </div>
-    <div className="mb-4 text-3xl path font-light ">
-      <p className="bg-gradient-to-b from-gray-600 to-white bg-clip-text text-transparent">Please Choose Your Path</p>
+    <div className="mb-4 text-3xl path">
+      <p className="bg-gradient-to-b from-gray-600 to-white bg-clip-text text-transparent uppercase leading-none font-thin
+">Please Choose Your Path</p>
     </div>
 
-      <div className="flex flex-row gap-8 mt-15 text-xl">
+    <div className="flex flex-row gap-8 mt-15 text-xl">
 
       <Magnet>
-        <div className="gaming-btn flex flex-row items-center justify-center">
-      <button
-       className="cursor-pointer"
-       onClick={()=>router.push('/gaming')}
-       >
-        <p className="gaming-text">Gaming</p>
-      </button>
-      </div>
-      </Magnet>
-    
-      <Magnet>
-      <div className="coding-btn flex flex-row items-center justify-center">
-      <button
-      className="cursor-pointer "
-      onClick={()=>router.push('/coding')}
-      >
-        <p className="coding-text">
-          Coding
-        </p>
-      </button>
-      </div>
+        <Link
+          href="/gaming"
+          className="gaming-btn flex flex-row items-center justify-center cursor-pointer uppercase"
+        >
+          <p className="gaming-text">Gaming</p>
+        </Link>
       </Magnet>
 
-      </div>
+      <Magnet>
+        <Link
+          href="/coding"
+          className="coding-btn flex flex-row items-center justify-center cursor-pointer uppercase"
+        >
+          <p className="coding-text">Coding</p>
+        </Link>
+      </Magnet>
+
+    </div>
     </div>
 
     </div>
