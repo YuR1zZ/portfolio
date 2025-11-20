@@ -1,10 +1,10 @@
 'use client'
 
-import SpotLight from "./ui/SpotLight"
+import SpotLight from "@/app/components/ui/SpotLight";
 import { useRef , useEffect } from "react"
 import { RiArrowRightUpLine } from "react-icons/ri";
-import Button from "./ui/CodingButton";
-import Magnet from './ui/Magnet';
+import Button from "@/app/components/ui/CodingButton";
+import Magnet from "@/app/components/ui/Magnet";
 
 
 const CodingFooter = () => {

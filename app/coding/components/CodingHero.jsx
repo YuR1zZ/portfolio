@@ -1,12 +1,12 @@
 'use client'
 
-import Particles from "./ui/Particles"
-import SpotLight from "./ui/SpotLight"
-import { TextAnimate } from "./ui/TextBlur"
+import Particles from "../../components/ui/Particles"
+import SpotLight from "../../components/ui/SpotLight"
+import { TextAnimate } from "../../components/ui/TextBlur"
 import Lenis from "@studio-freight/lenis"
 import { useEffect, useState } from "react"
-import Button from "./ui/CodingButton"
-import PlanetSketch from "./ui/Planet"
+import Button from "../../components/ui/CodingButton"
+import PlanetSketch from "../../components/ui/Planet"
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 

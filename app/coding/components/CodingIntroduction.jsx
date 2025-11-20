@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { motion } from 'framer-motion'
-import useMousePosition from "./ui/useMousePosition";
-import SpotLight from "./ui/SpotLight";
+import useMousePosition from "../../components/ui/useMousePosition";
+import SpotLight from "../../components/ui/SpotLight";
 
 
 const Introduction = () => {
