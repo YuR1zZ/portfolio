@@ -8,7 +8,7 @@ import SpotLight from "../../components/ui/SpotLight"
 
 gsap.registerPlugin(ScrollTrigger)
 
-const WhoAmI = () => {
+const CodingWhoAmI = () => {
 
 
 useEffect(() => {
@@ -84,4 +84,4 @@ useEffect(() => {
   )
 }
 
-export default WhoAmI
+export default CodingWhoAmI

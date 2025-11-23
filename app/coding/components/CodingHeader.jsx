@@ -3,18 +3,38 @@
 
 import Magnet from '../../components/ui/Magnet';
 import Link from 'next/link';
+import { useState , useEffect } from 'react';
 
 const CodingHeader = () => {
 
+  const [isScrolled, setIsScrolled] = useState();
+
+  useEffect(() => {
+    const handleScroll = ()=>{
+      if(window.scrollY > 10) {
+        setIsScrolled(true)
+      }else {
+        setIsScrolled(false)
+      }
+    }
+
+    window.addEventListener('scroll' , handleScroll);
+  
+    return () => {
+      window.removeEventListener('scroll' , handleScroll)
+    }
+  }, []);
 
   return (
-    <div className='flex w-full justify-between items-center text-[#EEEEEE] fixed top-0 left-0 z-[10] p-4'>
+    <div className={`flex w-full justify-between items-center text-[#EEEEEE] fixed top-0 left-0 z-[10] p-4 transition-all duration-300
+      ${isScrolled ? "backdrop-blur-md bg-[#111111]/40" : "bg-transparent"}
+      `}>
       
-      {/* Logo / Name */}
+      {/* Name */}
       <div className='flex justify-center items-center cursor-none'>
         <Magnet>
           <Link
-            href="/coding"
+            href="/"
             className="relative text-[#EEEEEE] font-medium overflow-hidden"
           >
             <span className="underline-text relative z-10">MohammadPanahi</span>
@@ -28,7 +48,7 @@ const CodingHeader = () => {
 
         <Magnet>
           <Link
-            href="/"
+            href="/coding"
             className="relative text-[#EEEEEE] font-medium overflow-hidden"
           >
             <span className="underline-text relative z-10">Home</span>
