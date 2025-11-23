@@ -11,7 +11,7 @@ import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
 
 
-const Hero = () => {
+const CodingHero = () => {
 
 
   useEffect(() => {
@@ -85,4 +85,4 @@ const Hero = () => {
   )
 }
 
-export default Hero
+export default CodingHero

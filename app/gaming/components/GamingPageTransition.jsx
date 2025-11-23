@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import gsap from "gsap";
 
-export default function CodingPageTransition({ children }) {
+export default function GamingPageTransition({ children }) {
   const router = useRouter();
   const pathname = usePathname();
 

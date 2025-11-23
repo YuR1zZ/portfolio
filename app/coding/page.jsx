@@ -1,10 +1,9 @@
 
-import CodingHeader from "./components/CodingHeader"
-import Hero from "./components/CodingHero"
-import Introduction from "./components/CodingIntroduction"
-import CodingIntroduction2 from "./about/page"
+import CodingIntroduction2 from "./components/CodingAbout"
+import CodingHero from "./components/CodingHero"
+import CodingIntroduction from "./components/CodingIntroduction"
 import CodingSpecialties from "./components/CodingSpecialties"
-import WhoAmI from "./components/CodingWhoAmI"
+import CodingWhoAmI from "./components/CodingWhoAmI"
 import CodingFooter from "./footer/page"
 
 
@@ -12,11 +11,10 @@ import CodingFooter from "./footer/page"
 const page = () => {
   return (
     <div>
-      <CodingHeader />
-      <Hero />
-      <Introduction />
+      <CodingHero />
+      <CodingIntroduction />
       <CodingSpecialties />
-      <WhoAmI />
+      <CodingWhoAmI />
       <CodingIntroduction2 />
       <CodingFooter />
     </div>

@@ -6,7 +6,7 @@ import useMousePosition from "../../components/ui/useMousePosition";
 import SpotLight from "../../components/ui/SpotLight";
 
 
-const Introduction = () => {
+const CodingIntroduction = () => {
   const [isHovered, setIsHovered] = useState(false);
   const { x, y } = useMousePosition();
   const size = isHovered ? 400 : 40;
@@ -41,4 +41,4 @@ const Introduction = () => {
   )
 }
 
-export default Introduction
+export default CodingIntroduction
