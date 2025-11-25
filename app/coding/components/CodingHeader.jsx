@@ -26,8 +26,8 @@ const CodingHeader = () => {
   }, []);
 
   return (
-    <div className={`flex w-full justify-between items-center text-[#EEEEEE] fixed top-0 left-0 z-[10] p-4 transition-all duration-300
-      ${isScrolled ? "backdrop-blur-md bg-[#111111]/40" : "bg-transparent"}
+    <div className={`flex w-full justify-between items-center text-[#EEEEEE] fixed top-0 z-[10] p-4 transition-all duration-300
+      ${isScrolled ? "backdrop-blur-md bg-[#111111]/40 rounded-3xl px-10 max-sm:px-4 max-md:px-4" : "bg-transparent px-4"}
       `}>
       
       {/* Name */}
