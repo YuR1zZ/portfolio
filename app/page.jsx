@@ -86,11 +86,11 @@ export default function Home() {
 
     <div className="absolute flex flex-col items-center justify-center z-20">
       <div className="text-5xl mb-7 welcome">
-    <h1 className="bg-gradient-to-b from-gray-600 to-white bg-clip-text text-transparent uppercase leading-none font-thin
+    <h1 className="bg-gradient-to-b from-gray-600 to-white bg-clip-text text-transparent uppercase text-center leading-none font-thin
   ">Welcome</h1>
     </div>
     <div className="mb-4 text-3xl path">
-      <p className="bg-gradient-to-b from-gray-600 to-white bg-clip-text text-transparent uppercase leading-none font-thin
+      <p className="bg-gradient-to-b from-gray-600 to-white bg-clip-text text-transparent uppercase text-center leading-none font-thin
 ">Please Choose Your Path</p>
     </div>
 
@@ -99,7 +99,7 @@ export default function Home() {
       <Magnet>
         <Link
           href="/gaming"
-          className="gaming-btn flex flex-row items-center justify-center cursor-pointer uppercase"
+          className="gaming-btn flex flex-row items-center justify-center cursor-pointer"
         >
           <p className="gaming-text">Gaming</p>
         </Link>
@@ -108,7 +108,7 @@ export default function Home() {
       <Magnet>
         <Link
           href="/coding"
-          className="coding-btn flex flex-row items-center justify-center cursor-pointer uppercase"
+          className="coding-btn flex flex-row items-center justify-center cursor-pointer"
         >
           <p className="coding-text">Coding</p>
         </Link>
