@@ -4,100 +4,97 @@ import { useEffect, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import gsap from "gsap";
 
-export default function GamingPageTransition({ children }) {
+export default function PageTransition({ children }) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const overlayRef = useRef(null);
-  const blocksRef = useRef([]);
   const isTransitioning = useRef(false);
-  const transitionTl = useRef(null);
+  const overlayRef = useRef(null);
+  const tl = useRef(null);
 
-  useEffect(() => {
-    const createBlocks = () => {
-      if (!overlayRef.current) return;
 
-      overlayRef.current.innerHTML = "";
-      blocksRef.current = [];
+  // EXIT ANIMATION
 
-      for (let i = 0; i < 20; i++) {
-        const block = document.createElement("div");
-        block.className = "block";
-        overlayRef.current.appendChild(block);
-        blocksRef.current.push(block);
-      }
-    };
+  const animateExit = (url) => {
+    if (tl.current) tl.current.kill();
 
-    createBlocks();
-
-    const links = document.querySelectorAll('a[href^="/"]');
-    const listeners = [];
-
-    links.forEach((link) => {
-      const handler = (e) => {
-        e.preventDefault();
-        const url = new URL(link.href).pathname;
-
-        if (!isTransitioning.current && url !== pathname) {
-          isTransitioning.current = true;
-          overPage(url);
-        }
-      };
-
-      link.addEventListener("click", handler);
-      listeners.push({ link, handler });
+    tl.current = gsap.timeline({
+      onComplete: () => router.push(url),
     });
 
-    revealPage();
-
-    return () => {
-      // clean up event listeners
-      listeners.forEach(({ link, handler }) =>
-        link.removeEventListener("click", handler)
-      );
-
-      // kill any running GSAP timelines
-      if (transitionTl.current) transitionTl.current.kill();
-    };
-  }, [pathname]);
-
-  const overPage = (url) => {
-    transitionTl.current = gsap.timeline({
-      onComplete: () => {
-        router.push(url);
-      },
-    });
-
-    transitionTl.current.to(blocksRef.current, {
-      scaleX: 1,
-      duration: 0.4,
-      stagger: 0.02,
-      ease: "power2.out",
-      transformOrigin: "left",
+    tl.current.to(overlayRef.current, {
+      y: 0,
+      duration: 0.7,
+      ease: "power4.inOut",
     });
   };
 
-  const revealPage = () => {
-    if (!blocksRef.current.length) return;
 
-    gsap.set(blocksRef.current, { scaleX: 1, transformOrigin: "right" });
+  // ENTER ANIMATION
 
-    gsap.to(blocksRef.current, {
-      scaleX: 0,
-      duration: 0.4,
-      stagger: 0.02,
-      ease: "power2.out",
-      transformOrigin: "right",
+  const animateEnter = () => {
+    gsap.set(overlayRef.current, { y: 0 }); // start covered
+
+    gsap.to(overlayRef.current, {
+      y: "-100%",
+      duration: 0.8,
+      ease: "power4.inOut",
       onComplete: () => {
         isTransitioning.current = false;
       },
     });
   };
 
+
+  useEffect(() => {
+    const links = document.querySelectorAll('a[href^="/"]');
+    const listeners = [];
+
+    links.forEach((link) => {
+      const handler = (e) => {
+        const url = new URL(link.href).pathname;
+        if (url === pathname) return;
+        if (isTransitioning.current) return;
+
+        e.preventDefault();
+        isTransitioning.current = true;
+        animateExit(url);
+      };
+
+      link.addEventListener("click", handler);
+      listeners.push({ link, handler });
+    });
+
+    return () => {
+      listeners.forEach(({ link, handler }) =>
+        link.removeEventListener("click", handler)
+      );
+    };
+  }, [pathname]);
+
+  // Run enter animation when route loads
+  useEffect(() => {
+    animateEnter();
+  }, [pathname]);
+
+
   return (
     <>
-      <div ref={overlayRef} className="transition-overlay"></div>
+      <div ref={overlayRef} style={overlayStyle} />
       {children}
     </>
   );
 }
+
+
+const overlayStyle = {
+  position: "fixed",
+  left: 0,
+  top: 0,
+  width: "100vw",
+  height: "100vh",
+  background: "black",
+  zIndex: 9999,
+  pointerEvents: "none",
+  transform: "translateY(100%)",
+};

@@ -35,14 +35,16 @@ const Magnet = ({children}) => {
         xTo(0)
         yTo(0)
         //revert hover animation
-        gsap.to(ref.current, { scale: 1, duration: 0.4, ease: 'power2.out' });
+        // change scale from here if it's needed
+        gsap.to(ref.current, { duration: 0.4, ease: 'power2.out' });
         if (underline) {
         gsap.to(underline, { width: 0, duration: 0.4, ease: 'power2.out' });
         }
       }
 
       const mouseEnter = () => {
-        gsap.to(ref.current, { scale: 1, duration: 0.4, ease: 'power2.out' });
+        // change scale from here if it's needed
+        gsap.to(ref.current, { duration: 0.4, ease: 'power2.out' });
         if (underline) {
         gsap.to(underline, { width: '100%', duration: 0.4, ease: 'power2.out' });
         }
