@@ -12,6 +12,7 @@ const GamingHero = () => {
   return (
     <main className='relative w-full h-screen overflow-hidden flex items-center justify-center'>
       <StarsBackground />
+      
 
         <div className='hero-text'>
 
