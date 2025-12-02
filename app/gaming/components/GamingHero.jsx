@@ -22,20 +22,33 @@ const GamingHero = () => {
   return (
     <main className='relative w-full h-screen overflow-hidden flex items-center justify-center'>
       <StarsBackground />
-      
 
-        <div className='hero-text'>
-          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus modi tenetur eum reiciendis earum assumenda doloribus repudiandae asperiores inventore hic porro minus animi voluptates nam ipsa ipsam beatae, nostrum impedit.</p>
-        </div>
 
-        <Canvas camera={{position: [0,2,5], fov:50}}>
-          <ambientLight intensity={0.5}/>
-          <directionalLight position={[5,5,5]} intensity={1}/>
-          <Suspense fallback={null}>
-            <Model path='/models/scene.gltf'/>
-          </Suspense>
-          <OrbitControls />
-        </Canvas>
+      <div className="flex w-full h-screen">
+
+  {/* 3/4 — Canvas */}
+  <div className="w-full h-full border-2 my-auto mx-auto">
+    <Canvas camera={{ position: [180, 50, 100], fov: 50 }}>
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[5, 5, 5]} intensity={1} />
+      <Suspense fallback={null}>
+        <Model path="/models/scene.gltf" />
+      </Suspense>
+      <OrbitControls minDistance={5} maxDistance={6}/>
+    </Canvas>
+  </div>
+
+  {/* 1/4 — Text */}
+  <div className="w-[500px] h-[300px] border-2 my-auto mx-auto flex items-center justify-center p-10">
+    <p className="text-center">
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus modi tenetur eum reiciendis earum assumenda doloribus repudiandae asperiores inventore hic porro minus animi voluptates nam ipsa ipsam beatae, nostrum impedit.
+    </p>
+  </div>
+
+</div>
+
+
+        
 
         <div className='absolute flex justify-end items-center h-10 w-27 bg-white rounded-3xl bottom-8'>
           
