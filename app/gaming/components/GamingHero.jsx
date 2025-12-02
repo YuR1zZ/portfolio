@@ -24,28 +24,30 @@ const GamingHero = () => {
       <StarsBackground />
 
 
-      <div className="flex w-full h-screen">
-
-  {/* 3/4 — Canvas */}
-  <div className="w-full h-full border-2 my-auto mx-auto">
-    <Canvas camera={{ position: [180, 50, 100], fov: 50 }}>
+    
+  
+  <div className="absolute w-2/4 h-full left-0 p-10 translate-x-20">
+    <Canvas camera={{ position: [-70, 50, 100], fov: 50 }}>
       <ambientLight intensity={0.5} />
       <directionalLight position={[5, 5, 5]} intensity={1} />
       <Suspense fallback={null}>
         <Model path="/models/scene.gltf" />
       </Suspense>
-      <OrbitControls minDistance={5} maxDistance={6}/>
+      <OrbitControls minDistance={7} maxDistance={8}/>
     </Canvas>
   </div>
 
-  {/* 1/4 — Text */}
-  <div className="w-[500px] h-[300px] border-2 my-auto mx-auto flex items-center justify-center p-10">
-    <p className="text-center">
+  
+  <div className="absolute w-1/3 z-2 p-10 right-0 -translate-x-50 flex flex-col justify-center items-center">
+  <h1 className='text-5xl mb-10 gaming-text'>
+    To the Infinity and Beyond
+  </h1>
+    <p className="text-center text-2xl">
       Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus modi tenetur eum reiciendis earum assumenda doloribus repudiandae asperiores inventore hic porro minus animi voluptates nam ipsa ipsam beatae, nostrum impedit.
     </p>
   </div>
 
-</div>
+
 
 
         
