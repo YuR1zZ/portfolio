@@ -7,7 +7,6 @@ import { SplitText } from "gsap/all";
 import Magnet from "./components/ui/Magnet";
 import SpotLight from "./components/ui/SpotLight";
 import { LightRays } from "./components/ui/LightRay";
-import { BackgroundBeams } from "./components/ui/BgBeams";
 import Link from "next/link";
 
 
@@ -80,7 +79,7 @@ export default function Home() {
 
     <LightRays />
 
-    <BackgroundBeams className="absolute inset-0 z-0" />
+    
     
 
 
