@@ -7,6 +7,8 @@ import Link from 'next/link'
 import { RxHamburgerMenu } from "react-icons/rx";
 import React , {Suspense} from 'react';
 import { BackgroundBeams } from '@/app/components/ui/BgBeams';
+import { useNavigate } from 'react-router-dom';
+
 
 
 
@@ -17,6 +19,8 @@ const GamingHero = () => {
   function Model({ path }) {
   const { scene } = useGLTF(path);
   return <primitive object={scene} />;
+
+  const navigate = useNavigate()
 }
 
 
@@ -59,23 +63,21 @@ const GamingHero = () => {
 
 
         
-
+      <Link href='/gaming/menu'>
         <div className='absolute flex justify-end items-center h-10 w-27 bg-white rounded-3xl bottom-8'>
-          
           <div className='mr-2'>
-            <Link href='/gaming/menu'>
             <span className='text-black'>
               Menu
             </span>
-            </Link>
           </div>
 
           <div className='relative flex justify-center items-center mr-2 bg-[#4a4a4a] h-9 w-9 rounded-full'>
             <RxHamburgerMenu />
           </div>
           
-          
         </div>
+
+        </Link>
       
     </main>
   )
