@@ -23,14 +23,16 @@ const GamingHero = () => {
   return (
     <main className='relative w-full h-screen overflow-hidden flex items-center justify-center'>
       <StarsBackground />
-      <BackgroundBeams />
+      <div className='hidden lg:block'>
+        <BackgroundBeams />
+      </div>
 
 
     
   
-    <div className='absolute flex flex-row items-center justify-center h-full w-full'>
+    <div className='absolute flex items-center justify-center h-full w-full'>
 
-    <div className="relative h-full w-2/4 border-1 ">
+    <div className="absolute hidden h-full left-0 top-0 2xl:w-[55rem] xl:w-[50rem] lg:w-[50rem] -translate-y-50 lg:block pointer-event-none">
     <Canvas camera={{ position: [-70, 50, 100], fov: 50 }}>
       <ambientLight intensity={0.5} />
       <directionalLight position={[5, 5, 5]} intensity={1} />
@@ -42,7 +44,7 @@ const GamingHero = () => {
   </div>
 
   
-  <div className="relative border-1 w-1/4 mr-20">
+  <div className="absolute w-[30rem] pointer-events-none sm:">
   <h1 className='text-4xl mb-10 gaming-text text-center'>
     To the Infinity and Beyond
   </h1>
