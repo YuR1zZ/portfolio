@@ -38,7 +38,7 @@ useGSAP(()=>{
     yPercent: 60,
     duration: 0.7,
     stagger: 0.06,
-    delay: 0.8,
+    delay: 1,
   })
 
   gsap.from('.gaming-hero-title',{
@@ -46,7 +46,7 @@ useGSAP(()=>{
     yPercent: 60,
     duration: 0.7,
     stagger: 0.06,
-    delay: 0.3,
+    delay: 0.7,
   })
   gsap.from('.gaming-hero-menu',{
     opacity: 0,
@@ -60,7 +60,7 @@ useGSAP(()=>{
     yPercent:2,
     duration: 0.7,
     stagger: 0.06,
-    delay: 2,
+    delay: 1.8,
   })
 })
 
