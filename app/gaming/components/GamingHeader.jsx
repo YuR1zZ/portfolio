@@ -30,14 +30,14 @@ const GamingHeader = () => {
       ${isScrolled ? "backdrop-blur-md bg-[#111111]/40 rounded-3xl px-10 max-sm:px-4 max-md:px-4" : "bg-transparent px-4"}
       `}>
       
-      {/* Name */}
+      
       <div className='flex justify-center items-center cursor-none'>
         <Magnet>
           <Link
             href="/"
             className="relative text-[#EEEEEE] font-medium overflow-hidden"
           >
-            <span className="underline-text relative z-10">MohammadPanahi</span>
+            <span className="underline-text relative z-10">YuR1</span>
             <span className="underline absolute left-1/2 -translate-x-1/2 bottom-0 w-0 h-[1px] bg-[#EEEEEE]"></span>
           </Link>
         </Magnet>
@@ -45,7 +45,7 @@ const GamingHeader = () => {
         
 
         <Magnet>
-        <div className="w-20 h-10 scale-[1.6] mr-10 overflow-hidden">
+        <div className="w-20 h-10 scale-[1.6] overflow-hidden">
         <img src="/images/yuri.png" alt="logo" className="object-contain w-full h-full" />
         </div>
         </Magnet>

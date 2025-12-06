@@ -1,100 +1,133 @@
-"use client";
+'use client'
 
-import { useEffect, useRef } from "react";
-import { useRouter, usePathname } from "next/navigation";
-import gsap from "gsap";
+import { useEffect, useRef } from "react"
+import { useRouter, usePathname } from "next/navigation"
+import gsap from "gsap"
 
-export default function PageTransition({ children }) {
-  const router = useRouter();
-  const pathname = usePathname();
+const BLOCK_SIZE = 60;
 
-  const isTransitioning = useRef(false);
-  const overlayRef = useRef(null);
-  const tl = useRef(null);
+export default function GamingPageTransition({children}){
+  const router = useRouter()
+  const pathname = usePathname()
 
+  const transitionGridRef = useRef(null)
+  const blocksRef = useRef([])
+  const isTransitioning = useRef(false)
+  const transitionTl = useRef(null)
 
-  // EXIT ANIMATION
+  const createTransitionGrid = () => {
+    if (!transitionGridRef.current) return;
 
-  const animateExit = (url) => {
-    if (tl.current) tl.current.kill();
+    const container = transitionGridRef.current;
+    container.innerHTML = '';
+    blocksRef.current = []
 
-    tl.current = gsap.timeline({
-      onComplete: () => router.push(url),
-    });
+    const gridWidth = window.innerWidth;
+    const gridHeight = window.innerHeight;
 
-    tl.current.to(overlayRef.current, {
-      y: 0,
-      duration: 0.7,
-      ease: "power4.inOut",
-    });
-  };
+    const columns = Math.ceil(gridWidth / BLOCK_SIZE);
+    const rows = Math.ceil(gridHeight / BLOCK_SIZE) + 1;
 
+    const offsetX = (gridWidth - columns * BLOCK_SIZE) / 2;
+    const offsetY = (gridHeight - rows * BLOCK_SIZE) / 2;
 
-  // ENTER ANIMATION
+    for(let row = 0; row < rows; row++){
+      for(let col = 0; col < columns; col++){
+        const block = document.createElement('div');
+        block.className = 'transition-block';
+        block.style.cssText = `
+        width: ${BLOCK_SIZE}px;
+        height: ${BLOCK_SIZE}px;
+        left: ${col * BLOCK_SIZE + offsetX}px;
+        top: ${row * BLOCK_SIZE + offsetY}px;`
 
-  const animateEnter = () => {
-    gsap.set(overlayRef.current, { y: 0 }); // start covered
+        container.appendChild(block);
+        blocksRef.current.push(block)
+      }
+    }
 
-    gsap.to(overlayRef.current, {
-      y: "-100%",
-      duration: 0.8,
-      ease: "power4.inOut",
-      onComplete: () => {
-        isTransitioning.current = false;
-      },
-    });
-  };
-
+    gsap.set(blocksRef.current, {opacity: 0})
+  }
 
   useEffect(() => {
+    createTransitionGrid();
+
+    const handleResize = () => {
+      createTransitionGrid();
+    }
+    window.addEventListener('resize', handleResize)
+
     const links = document.querySelectorAll('a[href^="/"]');
     const listeners = [];
 
     links.forEach((link) => {
       const handler = (e) => {
-        const url = new URL(link.href).pathname;
-        if (url === pathname) return;
-        if (isTransitioning.current) return;
-
         e.preventDefault();
-        isTransitioning.current = true;
-        animateExit(url);
+        const url = new URL(link.href).pathname;
+
+        if (!isTransitioning.current && url !== pathname) {
+          isTransitioning.current = true;
+          overPage(url);
+        }
       };
 
       link.addEventListener("click", handler);
       listeners.push({ link, handler });
     });
 
+    // Small delay to ensure grid is ready, then reveal immediately
+    requestAnimationFrame(() => {
+      revealPage();
+    });
+
     return () => {
+      window.removeEventListener('resize', handleResize)
       listeners.forEach(({ link, handler }) =>
         link.removeEventListener("click", handler)
       );
+      if (transitionTl.current) transitionTl.current.kill();
     };
   }, [pathname]);
 
-  // Run enter animation when route loads
-  useEffect(() => {
-    animateEnter();
-  }, [pathname]);
+  const overPage = (url) => {
+    if (transitionTl.current) transitionTl.current.kill();
 
+    transitionTl.current = gsap.timeline({
+      onComplete: () => {
+        router.push(url);
+      },
+    });
+
+    transitionTl.current.to(blocksRef.current, {
+      opacity: 1,
+      duration: 0.05,
+      ease: 'power2.inOut',
+      stagger: {amount: 0.5, from: 'random'},
+    });
+  };
+
+  const revealPage = () => {
+    if (!blocksRef.current.length) return;
+
+    // Set blocks to visible first (they should be from exit animation)
+    gsap.set(blocksRef.current, {opacity: 1});
+
+    // Immediately start revealing (no delay)
+    gsap.to(blocksRef.current, {
+      opacity: 0,
+      duration: 0.05,
+      ease: 'power2.inOut',
+      stagger: {amount: 0.5, from: 'random'},
+      onComplete: () => {
+        isTransitioning.current = false;
+      },
+    });
+  };
 
   return (
     <>
-      <div ref={overlayRef} style={overlayStyle} />
+      <div ref={transitionGridRef} className="transition-grid"/>
       {children}
     </>
-  );
+  )
 }
-
-
-const overlayStyle = {
-  position: "fixed",
-  left: 0,
-  top: 0,
-  width: "100vw",
-  height: "100vh",
-  background: "black",
-  zIndex: 9999,
-  pointerEvents: "none",
-  transform: "translateY(100%)",
-};

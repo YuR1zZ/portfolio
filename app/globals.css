@@ -22,6 +22,7 @@
   --card-1: #b2b2b2;
   --card-2: #717171;
   --card-3: #2f2f2f;
+  --base-300: #000000;
 }
 
 @theme inline {
@@ -602,5 +603,23 @@ body {
   background-color: #000;
   transform: scaleX(0);
   transform-origin: left;
+}
+
+
+.transition-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 99999;
+  overflow: hidden;
+}
+
+.transition-block {
+  position: absolute;
+  background-color: var(--base-300);
+  opacity: 0;
 }
 
