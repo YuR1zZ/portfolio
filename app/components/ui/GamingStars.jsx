@@ -6,8 +6,8 @@ export const StarsBackground = ({
   starDensity = 0.00015,
   allStarsTwinkle = true,
   twinkleProbability = 0.7,
-  minTwinkleSpeed = 0.5,
-  maxTwinkleSpeed = 1,
+  minTwinkleSpeed = 0.1,
+  maxTwinkleSpeed = 0.4,
   className,
 }) => {
   const [stars, setStars] = useState([]);

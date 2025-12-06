@@ -2,12 +2,11 @@
 
 import { StarsBackground } from '@/app/components/ui/GamingStars'
 import { OrbitControls ,useGLTF } from '@react-three/drei';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import Link from 'next/link'
 import { RxHamburgerMenu } from "react-icons/rx";
-import React , {Suspense} from 'react';
+import React , {Suspense, useRef} from 'react';
 import { BackgroundBeams } from '@/app/components/ui/BgBeams';
-import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import SplitText from 'gsap/SplitText';
 import ScrollTrigger from 'gsap/ScrollTrigger';
@@ -24,45 +23,59 @@ gsap.registerPlugin(ScrollTrigger)
 const GamingHero = () => {
 
   function Model({ path }) {
-  const { scene } = useGLTF(path);
-  return <primitive object={scene} />;
+    const { scene } = useGLTF(path);
+    const groupRef = useRef();
+    
+    // Add tilt effects only (no rotation)
+    useFrame((state) => {
+      if (groupRef.current) {
+        // Dynamic tilt effect - forward/backward tilt
+        groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 1.5) * 0.1;
+        // Subtle side-to-side tilt
+        groupRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 2) * 0.05;
+      }
+    });
+    
+    return (
+      <group ref={groupRef}>
+        <primitive object={scene} />
+      </group>
+    );
+  }
 
-  const navigate = useNavigate()
-}
+  useGSAP(()=>{
+    const splitLines = new SplitText('.gaming-hero-text',{type:'lines'})
 
-useGSAP(()=>{
-  const splitLines = new SplitText('.gaming-hero-text',{type:'lines'})
+    gsap.from(splitLines.lines,{
+      opacity: 0,
+      yPercent: 60,
+      duration: 0.7,
+      stagger: 0.06,
+      delay: 1,
+    })
 
-  gsap.from(splitLines.lines,{
-    opacity: 0,
-    yPercent: 60,
-    duration: 0.7,
-    stagger: 0.06,
-    delay: 1,
+    gsap.from('.gaming-hero-title',{
+      opacity: 0,
+      yPercent: 60,
+      duration: 0.7,
+      stagger: 0.06,
+      delay: 0.7,
+    })
+    gsap.from('.gaming-hero-menu',{
+      opacity: 0,
+      yPercent: 60,
+      duration: 0.7,
+      stagger: 0.06,
+      delay: 1.5,
+    })
+    gsap.from('.gaming-hero-spaceship',{
+      opacity: 0,
+      yPercent:2,
+      duration: 0.7,
+      stagger: 0.06,
+      delay: 1.8,
+    })
   })
-
-  gsap.from('.gaming-hero-title',{
-    opacity: 0,
-    yPercent: 60,
-    duration: 0.7,
-    stagger: 0.06,
-    delay: 0.7,
-  })
-  gsap.from('.gaming-hero-menu',{
-    opacity: 0,
-    yPercent: 60,
-    duration: 0.7,
-    stagger: 0.06,
-    delay: 1.5,
-  })
-  gsap.from('.gaming-hero-spaceship',{
-    opacity: 0,
-    yPercent:2,
-    duration: 0.7,
-    stagger: 0.06,
-    delay: 1.8,
-  })
-})
 
 
 
