@@ -7,10 +7,12 @@ const GamingMenuOverlay = ({ isOpen, onClose, children }) => {
   const [shouldRender, setShouldRender] = useState(false);
   const isAnimatingRef = useRef(false);
 
-  // Calculate the center point (bottom center where menu button is)
+  // Calculate the center point (menu button position - RxHamburgerMenu)
   const getCircleCenter = () => {
-    if (typeof window === 'undefined') return { x: '50%', y: '100%' };
-    return { x: '50%', y: '100%' }; // Bottom center
+    if (typeof window === 'undefined') return { x: '50%', y: 'calc(100% - 52px)' };
+    // Menu button is at bottom-8 (32px) with height h-10 (40px)
+    // Center of button = 32px + 20px = 52px from bottom
+    return { x: '50%', y: 'calc(100% - 52px)' };
   };
 
   useEffect(() => {
@@ -19,25 +21,25 @@ const GamingMenuOverlay = ({ isOpen, onClose, children }) => {
     }
   }, [isOpen]);
 
-  // Handle opening animation - circle expanding
+  // Handle opening animation - circle expanding from menu button
   useLayoutEffect(() => {
     if (isOpen && shouldRender && overlayRef.current && !isAnimatingRef.current) {
       isAnimatingRef.current = true;
       const element = overlayRef.current;
-      const center = getCircleCenter();
+      const center = getCircleCenter(); // Use menu button position
       
       // Calculate the maximum radius needed to cover the entire screen
       const maxRadius = Math.sqrt(
         Math.pow(window.innerWidth, 2) + Math.pow(window.innerHeight, 2)
       );
       
-      // Set initial state - circle at 0 radius
+      // Set initial state - circle at 0 radius at menu button position
       gsap.set(element, {
         clipPath: `circle(0% at ${center.x} ${center.y})`,
         opacity: 1
       });
       
-      // Animate circle expanding
+      // Animate circle expanding from menu button
       gsap.to(element, {
         clipPath: `circle(${maxRadius}px at ${center.x} ${center.y})`,
         duration: 1,
@@ -49,19 +51,14 @@ const GamingMenuOverlay = ({ isOpen, onClose, children }) => {
     }
   }, [isOpen, shouldRender]);
 
-  // Handle closing animation - circle shrinking
+  // Handle closing animation - circle shrinking to menu button
   useEffect(() => {
     if (!isOpen && overlayRef.current && shouldRender) {
       isAnimatingRef.current = true;
       const element = overlayRef.current;
-      const center = getCircleCenter();
+      const center = getCircleCenter(); // Use menu button position
       
-      // Calculate the maximum radius
-      const maxRadius = Math.sqrt(
-        Math.pow(window.innerWidth, 2) + Math.pow(window.innerHeight, 2)
-      );
-      
-      // Animate circle shrinking
+      // Animate circle shrinking to menu button position
       gsap.to(element, {
         clipPath: `circle(0% at ${center.x} ${center.y})`,
         duration: 1,
