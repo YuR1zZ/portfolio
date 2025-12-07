@@ -5,7 +5,6 @@ import GamingHeader from './components/GamingHeader'
 const page = () => {
   return (
     <div>
-      <GamingHeader />
       <GamingHero />
     </div>
   )

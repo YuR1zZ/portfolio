@@ -4,7 +4,6 @@ import { StarsBackground } from '@/app/components/ui/GamingStars'
 import { OrbitControls ,useGLTF } from '@react-three/drei';
 import { Canvas, useFrame } from '@react-three/fiber';
 import Link from 'next/link'
-import { RxHamburgerMenu } from "react-icons/rx";
 import React , {Suspense, useRef} from 'react';
 import { BackgroundBeams } from '@/app/components/ui/BgBeams';
 import gsap from 'gsap';
@@ -44,38 +43,31 @@ const GamingHero = () => {
   }
 
   useGSAP(()=>{
-    const splitLines = new SplitText('.gaming-hero-text',{type:'lines'})
+  const splitLines = new SplitText('.gaming-hero-text',{type:'lines'})
 
-    gsap.from(splitLines.lines,{
-      opacity: 0,
-      yPercent: 60,
-      duration: 0.7,
-      stagger: 0.06,
-      delay: 1,
-    })
-
-    gsap.from('.gaming-hero-title',{
-      opacity: 0,
-      yPercent: 60,
-      duration: 0.7,
-      stagger: 0.06,
-      delay: 0.7,
-    })
-    gsap.from('.gaming-hero-menu',{
-      opacity: 0,
-      yPercent: 60,
-      duration: 0.7,
-      stagger: 0.06,
-      delay: 1.5,
-    })
-    gsap.from('.gaming-hero-spaceship',{
-      opacity: 0,
-      yPercent:2,
-      duration: 0.7,
-      stagger: 0.06,
-      delay: 1.8,
-    })
+  gsap.from(splitLines.lines,{
+    opacity: 0,
+    yPercent: 60,
+    duration: 0.7,
+    stagger: 0.06,
+    delay: 1,
   })
+
+  gsap.from('.gaming-hero-title',{
+    opacity: 0,
+    yPercent: 60,
+    duration: 0.7,
+    stagger: 0.06,
+    delay: 0.7,
+  })
+  gsap.from('.gaming-hero-spaceship',{
+    opacity: 0,
+    yPercent:2,
+    duration: 0.7,
+    stagger: 0.06,
+    delay: 1.8,
+  })
+})
 
 
 
@@ -94,7 +86,7 @@ const GamingHero = () => {
 
     <div className="absolute hidden h-full left-0 top-0 2xl:w-[55rem] xl:w-[50rem] lg:w-[50rem] -translate-y-50 lg:block pointer-event-none gaming-hero-spaceship">
     <Canvas camera={{ position: [-90, 80, 100], fov: 50 }}>
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={1} />
       <directionalLight position={[5, 5, 5]} intensity={1} />
       <Suspense fallback={null}>
         <Model path="/models/scene.gltf" />
@@ -115,26 +107,6 @@ const GamingHero = () => {
 
 
     </div>
-
-
-
-        <div className='absolute bottom-8 flex justify-center items-center gaming-hero-menu'>
-      <Link href='/gaming/menu'>
-
-        <div className='flex justify-end items-center h-10 w-27 bg-white rounded-3xl'>
-          <div className='mr-2'>
-            <span className='text-black'>
-              Menu
-            </span>
-          </div>
-
-          <div className='relative flex justify-center items-center mr-2 bg-[#4a4a4a] h-9 w-9 rounded-full'>
-            <RxHamburgerMenu />
-          </div>
-        </div>
-
-        </Link>
-        </div>
       
     </main>
   )
