@@ -16,6 +16,7 @@
     "clsx": "^2.1.1",
     "framer-motion": "^12.23.24",
     "gsap": "^3.13.0",
+    "ionicons": "^8.0.13",
     "latest-version": "^9.0.0",
     "lenis": "^1.1.14-dev.3",
     "next": "15.5.4",

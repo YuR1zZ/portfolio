@@ -42,7 +42,7 @@ const GamingMenuOverlay = ({ isOpen, onClose, children }) => {
       // Animate circle expanding from menu button
       gsap.to(element, {
         clipPath: `circle(${maxRadius}px at ${center.x} ${center.y})`,
-        duration: 1,
+        duration: 1.5,
         ease: "power3.out",
         onComplete: () => {
           isAnimatingRef.current = false;

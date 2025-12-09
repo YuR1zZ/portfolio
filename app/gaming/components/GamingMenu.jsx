@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import GamingMenuOverlay from "./GamingMenuOverlay";
@@ -36,8 +38,15 @@ const GamingMenu = () => {
 
       {/* Fullscreen popup overlay */}
       <GamingMenuOverlay isOpen={menuOpen} onClose={() => setMenuOpen(false)}>
-        {/* 🟦 Insert your own content here */}
-        <h1 className="text-4xl font-bold">Your Menu Content</h1>
+        <div className="circular-menu">
+          <div className="joystick">
+            <ion-icon name='grid-sharp' class='center-icon center-main'></ion-icon>
+            <ion-icon name='chevron-up-sharp' class='center-icon center-up'></ion-icon>
+            <ion-icon name='chevron-down-sharp' class='center-icon center-down'></ion-icon>
+            <ion-icon name='chevron-back-sharp' class='center-icon center-left'></ion-icon>
+            <ion-icon name='chevron-forward-sharp' class='center-icon center-right'></ion-icon>
+          </div>
+        </div>
       </GamingMenuOverlay>
     </>
   );
