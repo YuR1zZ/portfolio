@@ -18,8 +18,8 @@ const CodingIntroduction2 = ()=> {
 
   useEffect( () => {
     gsap.registerPlugin(ScrollTrigger);
-    
-    const createAnimation = () => {
+
+  const createAnimation = () => {
       // Kill existing ScrollTriggers for this animation
       ScrollTrigger.getAll().forEach(trigger => {
         if (trigger.vars && trigger.vars.trigger === container.current) {
@@ -40,8 +40,8 @@ const CodingIntroduction2 = ()=> {
         opacity: 1,
         ease: "none",
         stagger: 0.1
-      })
-    }
+    })
+  }
     
     createAnimation();
     

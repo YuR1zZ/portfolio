@@ -256,7 +256,7 @@ const GamingMenuOverlay = ({ isOpen, onClose, menuItems = [] }) => {
       duration: 0.3,
       delay: maxDelay,
       ease: 'power2.out',
-      onComplete: () => {
+        onComplete: () => {
         menuOverlay.style.pointerEvents = 'none';
         isMenuAnimating = false;
         // Delay onClose to ensure animation is visible
@@ -264,8 +264,8 @@ const GamingMenuOverlay = ({ isOpen, onClose, menuItems = [] }) => {
           onClose();
         }, 100);
       },
-    });
-  }
+      });
+    }
 };
 
 const initCenterDrag = ()=> {
@@ -395,7 +395,7 @@ const initCenterDrag = ()=> {
             <ion-icon name='chevron-back-sharp' className='center-icon center-left'></ion-icon>
             <ion-icon name='chevron-forward-sharp' className='center-icon center-right'></ion-icon>
           </div>
-        </div>
+      </div>
     </div>
   )
 }
