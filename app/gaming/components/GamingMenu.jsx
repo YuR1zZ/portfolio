@@ -5,9 +5,19 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import GamingMenuOverlay from "./GamingMenuOverlay";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import Link from "next/link";
 
 const GamingMenu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const menuItems = [
+    { label: 'Home', icon: 'home-sharp', href: '/' },
+    { label: 'Gaming', icon: 'game-controller-sharp', href: '/gaming' },
+    { label: 'Coding', icon: 'code-sharp', href: '/coding' },
+    { label: 'About', icon: 'person-sharp', href: '/coding/about' },
+    { label: 'Portfolio', icon: 'layers-sharp', href: '/coding' },
+    { label: 'Contact', icon: 'mail-sharp', href: '/coding/footer' },
+  ];
 
   useGSAP(()=>{
     gsap.from('.gaming-hero-menu',{
@@ -22,7 +32,7 @@ const GamingMenu = () => {
 
   return (
     <>
-      {/* The small bottom menu button */}
+      {/* The small bottom menu button - KEEPING YOUR EXISTING BUTTON */}
       <main className="absolute bottom-8 left-1/2 -translate-x-1/2 gaming-hero-menu">
         <div
           className='flex justify-end items-center h-10 w-28 bg-white rounded-3xl cursor-pointer'
@@ -36,18 +46,12 @@ const GamingMenu = () => {
         </div>
       </main>
 
-      {/* Fullscreen popup overlay */}
-      <GamingMenuOverlay isOpen={menuOpen} onClose={() => setMenuOpen(false)}>
-        <div className="circular-menu">
-          <div className="joystick">
-            <ion-icon name='grid-sharp' class='center-icon center-main'></ion-icon>
-            <ion-icon name='chevron-up-sharp' class='center-icon center-up'></ion-icon>
-            <ion-icon name='chevron-down-sharp' class='center-icon center-down'></ion-icon>
-            <ion-icon name='chevron-back-sharp' class='center-icon center-left'></ion-icon>
-            <ion-icon name='chevron-forward-sharp' class='center-icon center-right'></ion-icon>
-          </div>
-        </div>
-      </GamingMenuOverlay>
+      {/* Fullscreen popup overlay with circular menu */}
+      <GamingMenuOverlay 
+        isOpen={menuOpen} 
+        onClose={() => setMenuOpen(false)}
+        menuItems={menuItems}
+      />
     </>
   );
 };

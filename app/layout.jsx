@@ -23,17 +23,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        <Script id="reload-on-resize" strategy="afterInteractive">
-          {`
-            let resizeTimer;
-            window.addEventListener("resize", () => {
-              clearTimeout(resizeTimer);
-              resizeTimer = setTimeout(() => {
-                location.reload();
-              }, 500);
-            });
-          `}
-        </Script>
         <Script
           type="module"
           src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"

@@ -50,7 +50,24 @@ export default function CodingPageTransition({ children }) {
 
     revealPage();
 
+    // Handle resize - recreate blocks if needed
+    let resizeTimer
+    const handleResize = () => {
+      clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(() => {
+        // Only recreate if blocks are missing (shouldn't happen, but safety check)
+        if (!blocksRef.current.length) {
+          createBlocks()
+          revealPage()
+        }
+      }, 250)
+    }
+
+    window.addEventListener('resize', handleResize)
+
     return () => {
+      clearTimeout(resizeTimer)
+      window.removeEventListener('resize', handleResize)
       // clean up event listeners
       listeners.forEach(({ link, handler }) =>
         link.removeEventListener("click", handler)

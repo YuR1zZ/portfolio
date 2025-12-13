@@ -19,11 +19,35 @@ const Page = () => {
 
     let isGapAnimationCompleted = false
     let isFlipAnimationCompleted = false
-
-    const mm = gsap.matchMedia()
+    let mm = gsap.matchMedia()
 
     const initAnimation = () => {
+      // Reset state variables
+      isGapAnimationCompleted = false
+      isFlipAnimationCompleted = false
+      
+      // Kill all existing ScrollTriggers
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+      
+      // Revert matchMedia to clean up previous contexts
+      mm.revert()
+      mm = gsap.matchMedia()
+      
+      // Reset card container styles when switching from large to small
+      gsap.set(cardContainer, { 
+        width: '100%',
+        gap: '0px',
+        clearProps: 'all'
+      })
+      
+      // Reset card styles
+      gsap.set('.card', {
+        rotationY: 0,
+        rotationZ: 0,
+        y: 0,
+        borderRadius: '',
+        clearProps: 'all'
+      })
 
       mm.add('(max-width: 999px)', () => {
         const cards = document.querySelectorAll('.card');
@@ -49,10 +73,13 @@ const Page = () => {
 
 
       mm.add('(min-width: 1000px)', () => {
+        // Recalculate end value on each init (handles resize)
+        const endValue = window.innerHeight * 4
+        
         ScrollTrigger.create({
           trigger: '.sticky',
           start: 'top top',
-          end: `+=${window.innerHeight * 4}px`,
+          end: `+=${endValue}px`,
           scrub: 1,
           pin: true,
           pinSpacing: true,
@@ -155,14 +182,16 @@ const Page = () => {
     let resizeTimer
     const handleResize = () => {
       clearTimeout(resizeTimer)
-      resizeTimer = setTimeout(initAnimation, 250)
+      resizeTimer = setTimeout(() => {
+        ScrollTrigger.refresh()
+        initAnimation()
+      }, 250)
     }
 
-    window.addEventListener('resize', ()=>{
-      ScrollTrigger.refresh();
-    })
+    window.addEventListener('resize', handleResize)
 
     return () => {
+      clearTimeout(resizeTimer)
       window.removeEventListener('resize', handleResize)
       mm.revert()
       ScrollTrigger.killAll()

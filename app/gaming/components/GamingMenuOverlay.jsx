@@ -1,98 +1,403 @@
-import { RxCross2 } from "react-icons/rx";
-import gsap from "gsap";
-import { useRef, useEffect, useState, useLayoutEffect } from "react";
+'use client'
 
-const GamingMenuOverlay = ({ isOpen, onClose, children }) => {
-  const overlayRef = useRef(null);
-  const [shouldRender, setShouldRender] = useState(false);
-  const isAnimatingRef = useRef(false);
+import gsap from "gsap"
+import { useEffect } from "react";
 
-  // Calculate the center point (menu button position - RxHamburgerMenu)
-  const getCircleCenter = () => {
-    if (typeof window === 'undefined') return { x: '50%', y: 'calc(100% - 52px)' };
-    // Menu button is at bottom-8 (32px) with height h-10 (40px)
-    // Center of button = 32px + 20px = 52px from bottom
-    return { x: '50%', y: 'calc(100% - 52px)' };
-  };
+const GamingMenuOverlay = ({ isOpen, onClose, menuItems = [] }) => {
+
+  const menuItemsList = menuItems.length > 0 ? menuItems : [
+    {label : 'Home' , icon : 'home-sharp', href: '/'},
+    {label : 'Gaming' , icon : 'game-controller-sharp', href: '/gaming'},
+    {label : 'Coding' , icon : 'code-sharp', href: '/coding'},
+    {label : 'About' , icon : 'person-sharp', href: '/coding/about'},
+    {label : 'Portfolio' , icon : 'layers-sharp', href: '/coding'},
+    {label : 'Contact' , icon : 'mail-sharp', href: '/coding/footer'},
+  ]
+
+  let isMenuOpen = false;
+  let isMenuAnimating = false;
+  let responsiveConfig = {};
+  let menuItemsRef = menuItemsList;
+
+  const getResponsiveConfig = ()=> {
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    const isMobile = viewportWidth < 1000;
+
+    const maxSize = Math.min(viewportWidth * 0.9, viewportHeight * 0.9);
+    const menuSize = isMobile ? Math.min(maxSize , 480) : 700;
+
+    return {
+      menuSize,
+      center: menuSize / 2,
+      innerRadius: menuSize * 0.08,
+      outerRadius: menuSize * 0.42,
+      contentRadius: menuSize * 0.28,
+    }
+  }
 
   useEffect(() => {
-    if (isOpen) {
-      setShouldRender(true);
+    if (!isOpen) return;
+
+    responsiveConfig = getResponsiveConfig()
+
+    const menu = document.querySelector('.circular-menu');
+    const joystick = document.querySelector('.joystick');
+    const menuOverlayNav = document.querySelector('.menu-overlay-nav');
+    const menuOverlayFooter = document.querySelector('.menu-overlay-footer');
+    const menuOverlay = document.querySelector('.menu-overlay');
+
+    if (!menu || !joystick) return;
+
+    menu.style.width = `${responsiveConfig.menuSize}px`;
+    menu.style.height = `${responsiveConfig.menuSize}px`;
+
+    gsap.set(joystick, {scale:0});
+    gsap.set([menuOverlayFooter, menuOverlayNav], {opacity:0})
+
+    // Clear existing segments
+    const existingSegments = menu.querySelectorAll('.menu-segment');
+    existingSegments.forEach(seg => seg.remove());
+
+    menuItemsRef = menuItemsList;
+    menuItemsList.forEach((item,index) => {
+      const segment = createSegment(item,index,menuItemsList.length);
+      segment.addEventListener('mouseenter', ()=>{
+        // Audio can be added here
+      })
+      menu.appendChild(segment)
+    })
+
+    const closeBtn = document.querySelector('.close-btn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        toggleMenu();
+      });
     }
+    
+    initCenterDrag();
+    
+    // Small delay to ensure DOM is ready, then open menu
+    setTimeout(() => {
+      toggleMenu();
+    }, 50);
   }, [isOpen]);
 
-  // Handle opening animation - circle expanding from menu button
-  useLayoutEffect(() => {
-    if (isOpen && shouldRender && overlayRef.current && !isAnimatingRef.current) {
-      isAnimatingRef.current = true;
-      const element = overlayRef.current;
-      const center = getCircleCenter(); // Use menu button position
-      
-      // Calculate the maximum radius needed to cover the entire screen
-      const maxRadius = Math.sqrt(
-        Math.pow(window.innerWidth, 2) + Math.pow(window.innerHeight, 2)
-      );
-      
-      // Set initial state - circle at 0 radius at menu button position
-      gsap.set(element, {
-        clipPath: `circle(0% at ${center.x} ${center.y})`,
-        opacity: 1
-      });
-      
-      // Animate circle expanding from menu button
-      gsap.to(element, {
-        clipPath: `circle(${maxRadius}px at ${center.x} ${center.y})`,
-        duration: 1.5,
-        ease: "power3.out",
-        onComplete: () => {
-          isAnimatingRef.current = false;
-        }
-      });
-    }
-  }, [isOpen, shouldRender]);
+  const createSegment = (item,index,total)=>{
+    const segment = document.createElement('a');
+    segment.className = 'menu-segment';
+    segment.href = item.href;
 
-  // Handle closing animation - circle shrinking to menu button
-  useEffect(() => {
-    if (!isOpen && overlayRef.current && shouldRender) {
-      isAnimatingRef.current = true;
-      const element = overlayRef.current;
-      const center = getCircleCenter(); // Use menu button position
-      
-      // Animate circle shrinking to menu button position
-      gsap.to(element, {
-        clipPath: `circle(0% at ${center.x} ${center.y})`,
-        duration: 1,
-        ease: "power3.out",
-        onComplete: () => {
-          setShouldRender(false);
-          isAnimatingRef.current = false;
-        }
-      });
-    }
-  }, [isOpen, shouldRender]);
+    const {menuSize , center , innerRadius , outerRadius , contentRadius} = responsiveConfig;
 
-  if (!shouldRender) return null;
+    const anglePerSegment = 360 / total;
+    const baseStartAngle = anglePerSegment * index;
+    const centerAngle = baseStartAngle + anglePerSegment /2;
+    const startAngle = baseStartAngle + 0.19;
+    const endAngle = baseStartAngle + anglePerSegment - 0.19;
+
+    const innerStartX = 
+    center + innerRadius * Math.cos(((startAngle - 90) * Math.PI) / 180);
+    const innerStartY = 
+    center + innerRadius * Math.sin(((startAngle - 90) * Math.PI) / 180);
+    const outerStartX = 
+    center + outerRadius * Math.cos(((startAngle - 90) * Math.PI) / 180);
+    const outerStartY = 
+    center + outerRadius * Math.sin(((startAngle - 90) * Math.PI) / 180);
+    const innerEndX = 
+    center + innerRadius * Math.cos(((endAngle - 90) * Math.PI) / 180);
+    const innerEndY = 
+    center + innerRadius * Math.sin(((endAngle - 90) * Math.PI) / 180);
+    const outerEndX = 
+    center + outerRadius * Math.cos(((endAngle - 90) * Math.PI) / 180);
+    const outerEndY = 
+    center + outerRadius * Math.sin(((endAngle - 90) * Math.PI) / 180);
+
+
+    const largeArcFlag = endAngle - startAngle > 180 ? 1:0;
+
+    const pathData = [
+      `M ${innerStartX} ${innerStartY}`,
+      `L ${outerStartX} ${outerStartY}`,
+      `A ${outerRadius} ${outerRadius} 0 ${largeArcFlag} 1 ${outerEndX} ${outerEndY}`,
+      `L ${innerEndX} ${innerEndY}`,
+      `A ${innerRadius} ${innerRadius} 0 ${largeArcFlag} 0 ${innerStartX} ${innerStartY}`,
+      'Z'
+    ].join(' ');
+
+    segment.style.clipPath = `path('${pathData}')`;
+    segment.style.width = `${menuSize}px`;
+    segment.style.height = `${menuSize}px`;
+
+    const contentX = 
+    center + contentRadius * Math.cos(((centerAngle - 90) * Math.PI) / 180)
+    const contentY = 
+    center + contentRadius * Math.sin(((centerAngle - 90) * Math.PI) / 180)
+
+    segment.innerHTML = `
+    <div class='segment-content'
+    style='left: ${contentX}px; top: ${contentY}px; transform:translate(-50% , -50%);'>
+    <ion-icon name='${item.icon}'></ion-icon>
+    <div class='label'>${item.label}</div>
+    </div>
+    `;
+
+    return segment;
+  }
+
+  const toggleMenu = () => {
+  if (isMenuAnimating) return;
+
+  const menuOverlay = document.querySelector('.menu-overlay');
+  const menuSegments = document.querySelectorAll('.menu-segment');
+  const joystick = document.querySelector('.joystick');
+  const menuOverlayNav = document.querySelector('.menu-overlay-nav');
+  const menuOverlayFooter = document.querySelector('.menu-overlay-footer');
+
+  if (!menuOverlay || !joystick) return;
+
+  isMenuAnimating = true;
+
+  if (!isMenuOpen) {
+    isMenuOpen = true;
+    // new Audio('/menu-open.mp3').play();
+
+    gsap.to(menuOverlay, {
+      opacity: 1,
+      duration: 0.3,
+      ease: 'power2.out',
+      onStart: () => (menuOverlay.style.pointerEvents = 'all'),
+    });
+
+    gsap.to(joystick, {
+      scale: 1,
+      duration: 0.4,
+      delay: 0.2,
+      ease: 'back.out(1.7)',
+    });
+
+    gsap.set([menuOverlayNav, menuOverlayFooter], { opacity: 0 });
+    gsap.to([menuOverlayNav, menuOverlayFooter], {
+      opacity: 1,
+      duration: 0.075,
+      delay: 0.3,
+      repeat: 3,
+      yoyo: true,
+      ease: 'power2.inOut',
+      onComplete: () =>
+        gsap.set([menuOverlayNav, menuOverlayFooter], { opacity: 1 }),
+    });
+
+    [...Array(menuSegments.length).keys()]
+      .sort(() => Math.random() - 0.5)
+      .forEach((originalIndex, shuffledPosition) => {
+        const segment = menuSegments[originalIndex];
+
+        gsap.set(segment, { opacity: 0 });
+        gsap.to(segment, {
+          opacity: 1,
+          duration: 0.075,
+          delay: shuffledPosition * 0.075,
+          repeat: 3,
+          yoyo: true,
+          ease: 'power2.inOut',
+          onComplete: () => {
+            gsap.set(segment, { opacity: 1 });
+            if (shuffledPosition === menuSegments.length - 1) {
+              isMenuAnimating = false;
+            }
+          },
+        });
+      });
+
+  } else {
+    isMenuOpen = false;
+    // new Audio('/menu-close.mp3').play();
+
+    gsap.to([menuOverlayNav, menuOverlayFooter], {
+      opacity: 0,
+      duration: 0.05,
+      repeat: 2,
+      yoyo: true,
+      ease: 'power2.inOut',
+      onComplete: () =>
+        gsap.set([menuOverlayNav, menuOverlayFooter], { opacity: 0 }),
+    });
+
+    gsap.to(joystick, {
+      scale: 0,
+      duration: 0.3,
+      delay: 0.2,
+      ease: 'back.in(1.7)',
+    });
+
+    [...Array(menuSegments.length).keys()]
+      .sort(() => Math.random() - 0.5)
+      .forEach((originalIndex, shuffledPosition) => {
+        const segment = menuSegments[originalIndex];
+
+        gsap.to(segment, {
+          opacity: 0,
+          duration: 0.05,
+          delay: shuffledPosition * 0.05,
+          repeat: 2,
+          yoyo: true,
+          ease: 'power2.inOut',
+          onComplete: () => gsap.set(segment, { opacity: 0 }),
+        });
+      });
+
+    // Wait for all animations to complete before closing
+    const totalDelay = (menuSegments.length - 1) * 0.05 + 0.05 * 2; // segment delay + repeat duration
+    const maxDelay = Math.max(totalDelay, 0.6);
+    
+    gsap.to(menuOverlay, {
+      opacity: 0,
+      duration: 0.3,
+      delay: maxDelay,
+      ease: 'power2.out',
+      onComplete: () => {
+        menuOverlay.style.pointerEvents = 'none';
+        isMenuAnimating = false;
+        // Delay onClose to ensure animation is visible
+        setTimeout(() => {
+          onClose();
+        }, 100);
+      },
+    });
+  }
+};
+
+const initCenterDrag = ()=> {
+  const joystick = document.querySelector('.joystick')
+  if (!joystick) return;
+
+  let isDragging = false;
+  let currentX = 0;
+  let currentY = 0;
+  let targetX = 0;
+  let targetY = 0;
+  let activeSegment = null
+
+  const animate = ()=>{
+    currentX += (targetX - currentX) * 0.15;
+    currentY += (targetY - currentY) * 0.15;
+
+    gsap.set(joystick, {
+      x: currentX,
+      y: currentY,
+    })
+
+    if(
+      isDragging &&
+      Math.sqrt(currentX * currentX + currentY * currentY) > 20
+    ){
+      const angle = Math.atan2(currentY,currentX) * (180 / Math.PI);
+      const segmentIndex = Math.floor(((angle + 90 + 360) % 360) / (360 / menuItemsRef.length)) % menuItemsRef.length;
+      const segment = document.querySelectorAll('.menu-segment')[segmentIndex]
+
+      if(segment !== activeSegment){
+        if(activeSegment){
+          activeSegment.style.animation = '';
+          activeSegment.querySelector('.segment-content').style.animation = '';
+          activeSegment.style.zIndex = '';
+        }
+        activeSegment = segment;
+        segment.style.animation = 'flickerHover 350ms ease-in-out forwards';
+        segment.querySelector('.segment-content').style.animation = 'contentFlickerHover 350ms ease-in-out forwards';
+        segment.style.zIndex = '10';
+        if(isMenuOpen){
+          new Audio('/menu-select.mp3').play().catch(()=>{})
+        }
+      }
+    }else{
+      if(activeSegment){
+        activeSegment.style.animation = '';
+        activeSegment.querySelector('.segment-content').style.animation = '';
+        activeSegment.style.zIndex = '';
+        activeSegment = null;
+      }
+    }
+    requestAnimationFrame(animate)
+  }
+  joystick.addEventListener('mousedown', (e)=>{
+    isDragging =true;
+    const rect = joystick.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const drag = (e)=> {
+      if(!isDragging) return
+
+      const deltaX = (e.clientX || e.touches[0]?.clientX) - centerX;
+      const deltaY = (e.clientY || e.touches[0]?.clientY) - centerY;
+      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+      const maxDrag = 100*0.25;
+
+      if(distance <= 20){
+        targetX = targetY = 0;
+      } else if(distance > maxDrag) {
+        const ratio = maxDrag / distance;
+        targetX = deltaX * ratio
+        targetY = deltaY * ratio
+      } else {
+        targetX = deltaX
+        targetY = deltaY
+      }
+      e.preventDefault()
+    }
+    
+    const endDrag = ()=> {
+      isDragging = false;
+      targetX = targetY = 0
+      document.removeEventListener('mousemove', drag)
+      document.removeEventListener('mouseup', endDrag)
+    }
+    document.addEventListener('mousemove', drag)
+    document.addEventListener('mouseup', endDrag)
+    e.preventDefault()
+  })
+  animate()
+}
+
+  if (!isOpen) return null;
 
   return (
-    <div 
-      ref={overlayRef}
-      className="gaming-menu-overlay fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex flex-col"
-    >
+    <div className="menu-overlay" style={{ zIndex: 999999, backgroundColor: '#000' }}>
+      <div className="menu-bg blur-[5px]" style={{ display: 'none' }}></div>
 
-      {/* Close Button */}
-      <button
-        onClick={onClose}
-        className="absolute left-6 top-6 text-white text-3xl"
-      >
-        <RxCross2 />
-      </button>
-
-      {/* Custom Content */}
-      <div className="flex-1 flex justify-center items-center text-white">
-        {children}
+      <div className="menu-overlay-nav">
+        <div className="close-btn" onClick={() => toggleMenu()}>
+          <div className="close-btn-bar"></div>
+          <div className="close-btn-bar"></div>
+        </div>
+        <div className="menu-overlay-items">
+          <a href='#'><ion-icon name='logo-google'></ion-icon></a>
+          <a href='#'><ion-icon name='logo-github'></ion-icon></a>
+          <a href='#'><ion-icon name='logo-vercel'></ion-icon></a>
+        </div>
       </div>
+
+      <div className="menu-overlay-footer">
+        <p>Copyright &copy; 2025 All Rights Reserved</p>
+        <div className="menu-overlay-items">
+          <a href='#'>Cookie Settings</a>
+          <a href='#'>Private Policy</a>
+          <a href='#'>Legal Disclaimer</a>
+        </div>
+      </div>
+
+      <div className="circular-menu">
+          <div className="joystick">
+            <ion-icon name='grid-sharp' className='center-icon center-main'></ion-icon>
+            <ion-icon name='chevron-up-sharp' className='center-icon center-up'></ion-icon>
+            <ion-icon name='chevron-down-sharp' className='center-icon center-down'></ion-icon>
+            <ion-icon name='chevron-back-sharp' className='center-icon center-left'></ion-icon>
+            <ion-icon name='chevron-forward-sharp' className='center-icon center-right'></ion-icon>
+          </div>
+        </div>
     </div>
-  );
-};
+  )
+}
 
 export default GamingMenuOverlay;

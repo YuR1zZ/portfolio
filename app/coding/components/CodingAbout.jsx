@@ -18,22 +18,55 @@ const CodingIntroduction2 = ()=> {
 
   useEffect( () => {
     gsap.registerPlugin(ScrollTrigger);
-    createAnimation();
-  }, [])
-
-  const createAnimation = () => {
+    
+    const createAnimation = () => {
+      // Kill existing ScrollTriggers for this animation
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.vars && trigger.vars.trigger === container.current) {
+          trigger.kill()
+        }
+      })
+      
+      // Recalculate end value dynamically
+      const endValue = window.innerHeight / 1.5
+      
       gsap.to(refs.current, {
         scrollTrigger: {
             trigger: container.current,
             scrub: true,
             start: `top center`,
-            end: `+=${window.innerHeight / 1.5}`,
+            end: `+=${endValue}px`,
         },
         opacity: 1,
         ease: "none",
         stagger: 0.1
-    })
-  }
+      })
+    }
+    
+    createAnimation();
+    
+    // Handle resize
+    let resizeTimer
+    const handleResize = () => {
+      clearTimeout(resizeTimer)
+      resizeTimer = setTimeout(() => {
+        ScrollTrigger.refresh()
+        createAnimation()
+      }, 250)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      clearTimeout(resizeTimer)
+      window.removeEventListener('resize', handleResize)
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.vars && trigger.vars.trigger === container.current) {
+          trigger.kill()
+        }
+      })
+    }
+  }, [])
 
   const splitWords = (phrase) => {
     let body = [];
