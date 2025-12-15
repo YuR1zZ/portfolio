@@ -1,5 +1,6 @@
 'use client'
 
+import { BackgroundRippleEffect } from "@/app/components/ui/JoyStickBg";
 import gsap from "gsap"
 import { useEffect } from "react";
 
@@ -363,8 +364,9 @@ const initCenterDrag = ()=> {
   if (!isOpen) return null;
 
   return (
-    <div className="menu-overlay" style={{ zIndex: 999999, backgroundColor: '#000' }}>
-      <div className="menu-bg blur-[5px]" style={{ display: 'none' }}></div>
+    <div className="menu-overlay" style={{ zIndex: 999999}}>
+      <BackgroundRippleEffect />
+      <div className="menu-bg" style={{ display: 'none' }}></div>
 
       <div className="menu-overlay-nav">
         <div className="close-btn" onClick={() => toggleMenu()}>
@@ -372,19 +374,19 @@ const initCenterDrag = ()=> {
           <div className="close-btn-bar"></div>
         </div>
         <div className="menu-overlay-items">
-          <a href='#'><ion-icon name='logo-google'></ion-icon></a>
+          <a href='#'><ion-icon name='logo-discord'></ion-icon></a>
           <a href='#'><ion-icon name='logo-github'></ion-icon></a>
-          <a href='#'><ion-icon name='logo-vercel'></ion-icon></a>
+          <a href='https://steamcommunity.com/id/YuR1isHere/' target="_blank"><ion-icon name='logo-steam'></ion-icon></a>
         </div>
       </div>
 
       <div className="menu-overlay-footer">
-        <p>Copyright &copy; 2025 All Rights Reserved</p>
+        {/* <p>Copyright &copy; 2025 All Rights Reserved</p>
         <div className="menu-overlay-items">
           <a href='#'>Cookie Settings</a>
           <a href='#'>Private Policy</a>
           <a href='#'>Legal Disclaimer</a>
-        </div>
+        </div> */}
       </div>
 
       <div className="circular-menu">

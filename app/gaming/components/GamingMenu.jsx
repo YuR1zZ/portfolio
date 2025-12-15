@@ -11,12 +11,12 @@ const GamingMenu = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const menuItems = [
-    { label: 'Home', icon: 'home-sharp', href: '/' },
-    { label: 'Gaming', icon: 'game-controller-sharp', href: '/gaming' },
-    { label: 'Coding', icon: 'code-sharp', href: '/coding' },
-    { label: 'About', icon: 'person-sharp', href: '/coding/about' },
-    { label: 'Portfolio', icon: 'layers-sharp', href: '/coding' },
-    { label: 'Contact', icon: 'mail-sharp', href: '/coding/footer' },
+    { label: 'Main Menu', icon: 'home-sharp', href: '/' },
+    { label: 'Lobby', icon: 'game-controller-sharp', href: '/gaming' },
+    { label: 'Mates', icon: 'code-sharp', href: '/gaming/mates' },
+    { label: 'About', icon: 'person-sharp', href: '/gaming/about' },
+    { label: 'Gallery', icon: 'layers-sharp', href: '/gaming/gallery' },
+    // { label: 'Socials', icon: 'mail-sharp', href: '/gaming/socials' },
   ];
 
   useGSAP(()=>{
@@ -34,8 +34,9 @@ const GamingMenu = () => {
     <>
       {/* The small bottom menu button - KEEPING YOUR EXISTING BUTTON */}
       <main className="absolute bottom-8 left-1/2 -translate-x-1/2 gaming-hero-menu">
+      
         <div
-          className='flex justify-end items-center h-10 w-28 bg-white rounded-3xl cursor-pointer'
+          className='flex justify-end items-center h-10 w-28 bg-amber-50 rounded-3xl cursor-pointer'
           onClick={() => setMenuOpen(true)}
         >
           <span className="mr-2 text-black">Menu</span>
