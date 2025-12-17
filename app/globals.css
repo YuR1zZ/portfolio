@@ -689,6 +689,8 @@ body {
 .menu-overlay-items {
   display: flex;
   gap: 1rem;
+  scale: 1.5;
+  margin-right: 2rem;
 }
 
 .menu-overlay-nav .menu-overlay-items a {
