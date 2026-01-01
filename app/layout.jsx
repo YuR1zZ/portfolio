@@ -3,10 +3,6 @@
 import { Afacad_Flux } from 'next/font/google';
 import "./globals.css";
 import Script from 'next/script';
-import { usePathname } from 'next/navigation';
-import GamingPageTransition from './gaming/components/GamingPageTransition';
-import CodingPageTransition from './coding/components/CodingPageTransition';
-
 
 const afacadFlux = Afacad_Flux({
   subsets: ['latin'],
@@ -15,11 +11,6 @@ const afacadFlux = Afacad_Flux({
 });
 
 export default function RootLayout({ children }) {
-  const pathname = usePathname(); // client-side hook
-
-  const isGaming = pathname.startsWith("/gaming");
-  const TransitionWrapper = isGaming ? GamingPageTransition : CodingPageTransition;
-
   return (
     <html lang="en">
       <head>
@@ -33,9 +24,7 @@ export default function RootLayout({ children }) {
         ></Script>
       </head>
       <body className={`${afacadFlux.variable} antialiased`}>
-        <TransitionWrapper>
-          {children}
-        </TransitionWrapper>
+        {children}
       </body>
     </html>
   );

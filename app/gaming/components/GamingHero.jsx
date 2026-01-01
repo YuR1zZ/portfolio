@@ -3,7 +3,6 @@
 import { StarsBackground } from '@/app/components/ui/GamingStars'
 import { OrbitControls ,useGLTF } from '@react-three/drei';
 import { Canvas, useFrame } from '@react-three/fiber';
-import Link from 'next/link'
 import React , {Suspense, useRef} from 'react';
 import { BackgroundBeams } from '@/app/components/ui/BgBeams';
 import gsap from 'gsap';

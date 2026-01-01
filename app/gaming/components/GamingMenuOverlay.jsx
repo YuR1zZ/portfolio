@@ -2,7 +2,7 @@
 
 import { BackgroundRippleEffect } from "@/app/components/ui/JoyStickBg";
 import gsap from "gsap"
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const GamingMenuOverlay = ({ isOpen, onClose, menuItems = [] }) => {
 
@@ -19,6 +19,8 @@ const GamingMenuOverlay = ({ isOpen, onClose, menuItems = [] }) => {
   let isMenuAnimating = false;
   let responsiveConfig = {};
   let menuItemsRef = menuItemsList;
+  
+  const dragCleanupRef = useRef(null);
 
   const getResponsiveConfig = ()=> {
     const viewportWidth = window.innerWidth;
@@ -70,18 +72,32 @@ const GamingMenuOverlay = ({ isOpen, onClose, menuItems = [] }) => {
     })
 
     const closeBtn = document.querySelector('.close-btn');
+    const closeBtnHandler = () => {
+      toggleMenu();
+    };
     if (closeBtn) {
-      closeBtn.addEventListener('click', () => {
-        toggleMenu();
-      });
+      closeBtn.addEventListener('click', closeBtnHandler);
     }
     
-    initCenterDrag();
+    // Initialize drag functionality
+    const cleanupDrag = initCenterDrag();
+    dragCleanupRef.current = cleanupDrag;
     
     // Small delay to ensure DOM is ready, then open menu
     setTimeout(() => {
       toggleMenu();
     }, 50);
+
+    // Cleanup function
+    return () => {
+      if (closeBtn) {
+        closeBtn.removeEventListener('click', closeBtnHandler);
+      }
+      if (dragCleanupRef.current) {
+        dragCleanupRef.current();
+        dragCleanupRef.current = null;
+      }
+    };
   }, [isOpen]);
 
   const createSegment = (item,index,total)=>{
@@ -271,14 +287,17 @@ const GamingMenuOverlay = ({ isOpen, onClose, menuItems = [] }) => {
 
 const initCenterDrag = ()=> {
   const joystick = document.querySelector('.joystick')
-  if (!joystick) return;
+  if (!joystick) return () => {};
 
   let isDragging = false;
   let currentX = 0;
   let currentY = 0;
   let targetX = 0;
   let targetY = 0;
-  let activeSegment = null
+  let activeSegment = null;
+  let animationFrameId = null;
+  let centerX = 0;
+  let centerY = 0;
 
   const animate = ()=>{
     currentX += (targetX - currentX) * 0.15;
@@ -297,15 +316,17 @@ const initCenterDrag = ()=> {
       const segmentIndex = Math.floor(((angle + 90 + 360) % 360) / (360 / menuItemsRef.length)) % menuItemsRef.length;
       const segment = document.querySelectorAll('.menu-segment')[segmentIndex]
 
-      if(segment !== activeSegment){
+      if(segment && segment !== activeSegment){
         if(activeSegment){
           activeSegment.style.animation = '';
-          activeSegment.querySelector('.segment-content').style.animation = '';
+          const activeContent = activeSegment.querySelector('.segment-content');
+          if(activeContent) activeContent.style.animation = '';
           activeSegment.style.zIndex = '';
         }
         activeSegment = segment;
         segment.style.animation = 'flickerHover 350ms ease-in-out forwards';
-        segment.querySelector('.segment-content').style.animation = 'contentFlickerHover 350ms ease-in-out forwards';
+        const content = segment.querySelector('.segment-content');
+        if(content) content.style.animation = 'contentFlickerHover 350ms ease-in-out forwards';
         segment.style.zIndex = '10';
         if(isMenuOpen){
           new Audio('/menu-select.mp3').play().catch(()=>{})
@@ -314,51 +335,155 @@ const initCenterDrag = ()=> {
     }else{
       if(activeSegment){
         activeSegment.style.animation = '';
-        activeSegment.querySelector('.segment-content').style.animation = '';
+        const activeContent = activeSegment.querySelector('.segment-content');
+        if(activeContent) activeContent.style.animation = '';
         activeSegment.style.zIndex = '';
         activeSegment = null;
       }
     }
-    requestAnimationFrame(animate)
+    animationFrameId = requestAnimationFrame(animate)
   }
-  joystick.addEventListener('mousedown', (e)=>{
-    isDragging =true;
+
+  const handleStart = (e) => {
+    isDragging = true;
     const rect = joystick.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-
-    const drag = (e)=> {
-      if(!isDragging) return
-
-      const deltaX = (e.clientX || e.touches[0]?.clientX) - centerX;
-      const deltaY = (e.clientY || e.touches[0]?.clientY) - centerY;
-      const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-      const maxDrag = 100*0.25;
-
-      if(distance <= 20){
-        targetX = targetY = 0;
-      } else if(distance > maxDrag) {
-        const ratio = maxDrag / distance;
-        targetX = deltaX * ratio
-        targetY = deltaY * ratio
-      } else {
-        targetX = deltaX
-        targetY = deltaY
-      }
-      e.preventDefault()
-    }
+    centerX = rect.left + rect.width / 2;
+    centerY = rect.top + rect.height / 2;
     
-    const endDrag = ()=> {
-      isDragging = false;
-      targetX = targetY = 0
-      document.removeEventListener('mousemove', drag)
-      document.removeEventListener('mouseup', endDrag)
+    // Reset joystick position
+    gsap.set(joystick, { x: 0, y: 0 });
+    currentX = 0;
+    currentY = 0;
+    e.preventDefault();
+  }
+
+  const handleMouseMove = (e) => {
+    if(!isDragging) return;
+
+    const clientX = e.clientX;
+    const clientY = e.clientY;
+
+    const deltaX = clientX - centerX;
+    const deltaY = clientY - centerY;
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    const maxDrag = 100 * 0.25;
+
+    if(distance <= 20){
+      targetX = targetY = 0;
+    } else if(distance > maxDrag) {
+      const ratio = maxDrag / distance;
+      targetX = deltaX * ratio;
+      targetY = deltaY * ratio;
+    } else {
+      targetX = deltaX;
+      targetY = deltaY;
     }
-    document.addEventListener('mousemove', drag)
-    document.addEventListener('mouseup', endDrag)
-    e.preventDefault()
-  })
-  animate()
+    e.preventDefault();
+  }
+
+  const handleTouchMove = (e) => {
+    if(!isDragging) return;
+
+    const clientX = e.touches[0]?.clientX;
+    const clientY = e.touches[0]?.clientY;
+    
+    if (clientX === undefined || clientY === undefined) return;
+
+    const deltaX = clientX - centerX;
+    const deltaY = clientY - centerY;
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    const maxDrag = 100 * 0.25;
+
+    if(distance <= 20){
+      targetX = targetY = 0;
+    } else if(distance > maxDrag) {
+      const ratio = maxDrag / distance;
+      targetX = deltaX * ratio;
+      targetY = deltaY * ratio;
+    } else {
+      targetX = deltaX;
+      targetY = deltaY;
+    }
+    e.preventDefault();
+  }
+
+  const handleMouseEnd = () => {
+    if(!isDragging) return;
+    const selectedSegment = activeSegment;
+    isDragging = false;
+    targetX = targetY = 0;
+    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener('mouseup', handleMouseEnd);
+    
+    // Navigate to the active segment if one was selected
+    // activeSegment only gets set when dragged > 20px, so if it exists, navigate
+    if(selectedSegment && selectedSegment.href) {
+      // Small delay to allow joystick to reset visually, then click the segment
+      setTimeout(() => {
+        selectedSegment.click();
+      }, 150);
+    }
+  }
+
+  const handleTouchEnd = () => {
+    if(!isDragging) return;
+    const selectedSegment = activeSegment;
+    isDragging = false;
+    targetX = targetY = 0;
+    document.removeEventListener('touchmove', handleTouchMove);
+    document.removeEventListener('touchend', handleTouchEnd);
+    
+    // Navigate to the active segment if one was selected
+    // activeSegment only gets set when dragged > 20px, so if it exists, navigate
+    if(selectedSegment && selectedSegment.href) {
+      // Small delay to allow joystick to reset visually, then click the segment
+      setTimeout(() => {
+        selectedSegment.click();
+      }, 150);
+    }
+  }
+
+  // Mouse events
+  const handleMouseDown = (e) => {
+    handleStart(e);
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseEnd);
+  };
+
+  // Touch events
+  const handleTouchStart = (e) => {
+    handleStart(e);
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    document.addEventListener('touchend', handleTouchEnd);
+  };
+
+  joystick.addEventListener('mousedown', handleMouseDown);
+  joystick.addEventListener('touchstart', handleTouchStart, { passive: false });
+
+  // Start animation loop
+  animationFrameId = requestAnimationFrame(animate);
+
+  // Return cleanup function
+  return () => {
+    if (animationFrameId !== null) {
+      cancelAnimationFrame(animationFrameId);
+    }
+    joystick.removeEventListener('mousedown', handleMouseDown);
+    joystick.removeEventListener('touchstart', handleTouchStart);
+    document.removeEventListener('mousemove', handleMouseMove);
+    document.removeEventListener('mouseup', handleMouseEnd);
+    document.removeEventListener('touchmove', handleTouchMove);
+    document.removeEventListener('touchend', handleTouchEnd);
+    
+    // Reset joystick position
+    gsap.set(joystick, { x: 0, y: 0 });
+    if(activeSegment){
+      activeSegment.style.animation = '';
+      const activeContent = activeSegment.querySelector('.segment-content');
+      if(activeContent) activeContent.style.animation = '';
+      activeSegment.style.zIndex = '';
+    }
+  };
 }
 
   if (!isOpen) return null;

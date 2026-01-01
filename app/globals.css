@@ -637,6 +637,8 @@ body {
   overflow: hidden;
   z-index: 999999 !important;
   background-color: #000;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .menu-bg {
@@ -794,11 +796,6 @@ body {
   animation: contentFlickerHover 350ms ease-in-out forwards;
 }
 
-.menu-overlay {
-  opacity: 0;
-  pointer-events: none;
-}
-
 @media (max-width : 1000px) {
   .segment-content ion-icon {
     font-size: 20px;
@@ -926,7 +923,6 @@ body {
   position: relative;
   width: 100vw;
   height: 100svh;
-  background-color: #000;
   overflow: hidden;
   z-index: 1;
 }
