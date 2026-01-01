@@ -883,7 +883,15 @@ body {
   }
 }
 
-.slider p, .slider a, .slider h1 {
+
+
+
+
+
+/* Mates Page  */
+
+
+.slider p,.slider a,.slider h1 {
   text-transform: uppercase;
   color: white;
 }
@@ -894,22 +902,36 @@ body {
   letter-spacing: -0.1rem;
 }
 
-.slider p ,.slider a {
+.slider h2.slide-subtitle {
+  font-size: 2.5rem;
+  font-weight: 500;
+  letter-spacing: -0.05rem;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+  color: white;
+}
+
+.slider p,.slider a {
   text-decoration: none;
   font-size: 0.9rem;
   font-weight: 500;
   letter-spacing: -0.01rem;
 }
 
+.gaming-hero-menu {
+  z-index: 50;
+}
+
 .slider {
   position: relative;
   width: 100vw;
   height: 100svh;
-  /* background-color: #000;
-  overflow: hidden; */
+  background-color: #000;
+  overflow: hidden;
+  z-index: 1;
 }
 
-.slide , .slide-img {
+.slide  {
   position: absolute;
   top: 0;
   left: 0;
@@ -923,9 +945,9 @@ body {
 
 .slide-header {
   position: absolute;
-  bottom: 8rem;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, -50%);
   width: 75%;
   text-align: center;
   display: flex;
@@ -942,6 +964,15 @@ body {
   margin-bottom: 1rem;
 }
 
+.slide-link {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  text-align: center;
+}
+
 .slide-info {
   position: absolute;
   left: 0;
@@ -949,14 +980,33 @@ body {
   width: 100vw;
   padding: 0 2rem;
   display: flex;
-  justify-content: end;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.slide-tags {
+  display: flex;
+  flex-direction: column;
+}
+
+.slide-index-wrapper {
+  display: flex;
+
 }
 
 
 .slide-index-wrapper p {
   text-align: center;
   width: 2rem;
+}
+
+.slide-tags p:first-child{
+  margin-bottom: 1rem;
+}
+
+.line {
+  overflow: hidden;
+  display: block;
 }
 
 .line, .word {
@@ -966,12 +1016,17 @@ body {
 }
 
 @media (max-width: 1000px) {
-  .slider h1 {
+  .slide-title h1 {
     font-size: 2rem;
     letter-spacing: 0;
   }
 
-  .slider p {
+  .slider h2.slide-subtitle {
+    font-size: 1rem;
+    letter-spacing: 0;
+  }
+
+  .slider p{
     font-size: 0.8rem;
   }
 
