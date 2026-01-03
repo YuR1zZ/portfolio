@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import gsap from "gsap"
 
@@ -14,6 +14,7 @@ export default function GamingPageTransition({children}){
   const blocksRef = useRef([])
   const isTransitioning = useRef(false)
   const transitionTl = useRef(null)
+  const [showContent, setShowContent] = useState(false)
 
   const createTransitionGrid = () => {
     if (!transitionGridRef.current) return;
@@ -50,6 +51,9 @@ export default function GamingPageTransition({children}){
   }
 
   useEffect(() => {
+    // Reset content visibility when pathname changes
+    setShowContent(false);
+    
     createTransitionGrid();
 
     const handleResize = () => {
@@ -57,23 +61,22 @@ export default function GamingPageTransition({children}){
     }
     window.addEventListener('resize', handleResize)
 
-    const links = document.querySelectorAll('a[href^="/"]');
-    const listeners = [];
+    // Use event delegation to catch all links, including dynamically created ones
+    const handleLinkClick = (e) => {
+      const link = e.target.closest('a[href^="/"]');
+      if (!link) return;
 
-    links.forEach((link) => {
-      const handler = (e) => {
-        e.preventDefault();
-        const url = new URL(link.href).pathname;
+      e.preventDefault();
+      const url = new URL(link.href).pathname;
 
-        if (!isTransitioning.current && url !== pathname) {
-          isTransitioning.current = true;
-          overPage(url);
-        }
-      };
+      if (!isTransitioning.current && url !== pathname) {
+        isTransitioning.current = true;
+        setShowContent(false); // Hide content before transition
+        overPage(url);
+      }
+    };
 
-      link.addEventListener("click", handler);
-      listeners.push({ link, handler });
-    });
+    document.addEventListener("click", handleLinkClick);
 
     // Small delay to ensure grid is ready, then reveal immediately
     requestAnimationFrame(() => {
@@ -82,9 +85,7 @@ export default function GamingPageTransition({children}){
 
     return () => {
       window.removeEventListener('resize', handleResize)
-      listeners.forEach(({ link, handler }) =>
-        link.removeEventListener("click", handler)
-      );
+      document.removeEventListener("click", handleLinkClick);
       if (transitionTl.current) transitionTl.current.kill();
     };
   }, [pathname]);
@@ -107,12 +108,15 @@ export default function GamingPageTransition({children}){
   };
 
   const revealPage = () => {
-    if (!blocksRef.current.length) return;
+    if (!blocksRef.current.length) {
+      setShowContent(true);
+      return;
+    }
 
     // Set blocks to visible first (they should be from exit animation)
     gsap.set(blocksRef.current, {opacity: 1});
 
-    // Immediately start revealing (no delay)
+    // Start revealing animation
     gsap.to(blocksRef.current, {
       opacity: 0,
       duration: 0.05,
@@ -120,6 +124,8 @@ export default function GamingPageTransition({children}){
       stagger: {amount: 0.5, from: 'random'},
       onComplete: () => {
         isTransitioning.current = false;
+        // Show content after transition completes
+        setShowContent(true);
       },
     });
   };
@@ -127,7 +133,7 @@ export default function GamingPageTransition({children}){
   return (
     <>
       <div ref={transitionGridRef} className="transition-grid"/>
-      {children}
+      {showContent && children}
     </>
   )
 }

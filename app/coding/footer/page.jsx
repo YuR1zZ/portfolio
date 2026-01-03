@@ -16,10 +16,13 @@ const CodingFooter = () => {
   let reqId = null;
 
   useEffect(() => {
-    setPath(progress);
+    if (path.current) {
+      setPath(progress);
+    }
   }, [])
 
   const setPath = (progress) => {
+    if (!path.current) return;
     const width = window.innerWidth * 0.7;
     path.current.setAttributeNS(null, "d", `M0 250 Q${width * x} ${250 + progress}, ${width} 250`)
   }
@@ -34,10 +37,11 @@ const CodingFooter = () => {
   }
 
   const manageMouseMove = (e) => {
+    if (!path.current) return;
     const { movementY, clientX } = e;
-    const pathBound =  path.current.getBoundingClientRect();
+    const pathBound = path.current.getBoundingClientRect();
     x = (clientX - pathBound.left) / pathBound.width;
-    progress+= movementY
+    progress += movementY
     setPath(progress);
   }
 

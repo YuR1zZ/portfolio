@@ -993,12 +993,13 @@ body {
   margin-bottom: 1rem;
 }
 
-.line {
+/* SplitText lines - scoped to slider to avoid conflict with footer .line */
+.slider .line {
   overflow: hidden;
   display: block;
 }
 
-.line, .word {
+.slider .line, .slider .word {
   position: relative;
   display: inline-block;
   will-change: transform;
