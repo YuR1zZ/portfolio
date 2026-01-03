@@ -962,9 +962,8 @@ body {
 
 .slide-link {
   position: absolute;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 0;
+  padding: 0 2rem;
   z-index: 1;
   text-align: center;
 }
@@ -980,14 +979,8 @@ body {
   align-items: flex-end;
 }
 
-.slide-tags {
-  display: flex;
-  flex-direction: column;
-}
-
 .slide-index-wrapper {
   display: flex;
-
 }
 
 
