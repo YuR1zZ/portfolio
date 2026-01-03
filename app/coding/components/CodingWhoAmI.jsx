@@ -34,7 +34,7 @@ useEffect(() => {
       })
       
       // Recalculate end value dynamically - reduced to minimize gap
-      const endValue = window.innerHeight * 1.2
+      const endValue = window.innerHeight * 0.6
       
       ScrollTrigger.create({
         trigger: ".whoami-container",
@@ -128,9 +128,6 @@ useEffect(() => {
             <div className='whoami-header'><img src='/images/whoami.svg'/></div>
             <div className='whoami-header'><img src='/images/whoami.svg'/></div>
             <div className='whoami-header'><img src='/images/whoami.svg'/></div>
-        </section>
-        <section className="h-[100vh]">
-        
         </section>
     </main>
   )
