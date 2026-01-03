@@ -46,6 +46,8 @@ const page = () => {
       slideLink.className = 'slide-link'
       const a = document.createElement('a')
       a.href = slideData.slideUrl
+      a.target = '_blank'
+      a.rel = 'noopener noreferrer'
       a.textContent = 'Steam Profile'
       slideLink.appendChild(a);
 
@@ -76,6 +78,30 @@ const page = () => {
       slide.appendChild(slideInfo)
 
       return slide;
+    }
+
+    const animateSlideElements = (slide) => {
+      const subtitle = slide.querySelector('.slide-subtitle')
+      const description = slide.querySelector('.slide-description')
+      const link = slide.querySelector('.slide-link')
+      const countdown = slide.querySelector('.slide-index-wrapper')
+
+      const elements = [subtitle, description, link, countdown].filter(Boolean)
+
+      // Set initial position (opacity already 0 from CSS or initial state)
+      gsap.set(elements, {
+        y: 100,
+        opacity: 0
+      })
+
+      // Animate to final position after a brief moment
+      gsap.to(elements, {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        ease: 'power2.out',
+        stagger: 0.1
+      })
     }
 
     const animateSlide = (direction) => {
@@ -121,12 +147,29 @@ const page = () => {
 
         slider.appendChild(newSlide);
 
+        // Set initial opacity to 0 for elements before animation
+        const subtitle = newSlide.querySelector('.slide-subtitle')
+        const description = newSlide.querySelector('.slide-description')
+        const link = newSlide.querySelector('.slide-link')
+        const countdown = newSlide.querySelector('.slide-index-wrapper')
+        gsap.set([subtitle, description, link, countdown].filter(Boolean), {
+          opacity: 0,
+          y: 100
+        })
+
         gsap.to(newSlide, {
           y: 0,
           clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
           duration: 1.5,
           ease: 'power4.out',
           force3d: true,
+          onStart: () => {
+            // Animate the slide elements when slide transition starts (or use onComplete for after)
+            // To start earlier, reduce the delay here or change onStart to onComplete
+            gsap.delayedCall(0.5, () => {
+              animateSlideElements(newSlide)
+            })
+          },
           onComplete: () => {
             isAnimating = false;
             setTimeout(() => {
@@ -185,6 +228,24 @@ const page = () => {
     window.addEventListener('touchmove', handleTouchMove, { passive: false })
     window.addEventListener('touchend', handleTouchEnd)
 
+    // Set initial opacity to 0 for first slide elements, then animate
+    const firstSlide = document.querySelector('.slide')
+    if (firstSlide) {
+      const subtitle = firstSlide.querySelector('.slide-subtitle')
+      const description = firstSlide.querySelector('.slide-description')
+      const link = firstSlide.querySelector('.slide-link')
+      const countdown = firstSlide.querySelector('.slide-index-wrapper')
+      
+      // Set initial state
+      gsap.set([subtitle, description, link, countdown].filter(Boolean), {
+        opacity: 0,
+        y: 100
+      })
+      
+      // Animate after page loads
+      animateSlideElements(firstSlide)
+    }
+
     return () => {
       window.removeEventListener('wheel', handleWheel)
       window.removeEventListener('touchstart', handleTouchStart)
@@ -213,7 +274,7 @@ const page = () => {
               <p>05</p>
             </div>
             <div className="slide-link">
-              <a href="https://steamcommunity.com/id/YuR1isHere/">Steam Profile</a>
+              <a href="https://steamcommunity.com/id/Iam_MAGNET/" target="_blank" rel="noopener noreferrer">Steam Profile</a>
             </div>
           </div>
         </div>
