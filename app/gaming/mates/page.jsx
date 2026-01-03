@@ -90,7 +90,7 @@ const page = () => {
 
       // Set initial position (opacity already 0 from CSS or initial state)
       gsap.set(elements, {
-        y: 100,
+        y: 40,
         opacity: 0
       })
 
@@ -154,7 +154,7 @@ const page = () => {
         const countdown = newSlide.querySelector('.slide-index-wrapper')
         gsap.set([subtitle, description, link, countdown].filter(Boolean), {
           opacity: 0,
-          y: 100
+          y: 40
         })
 
         gsap.to(newSlide, {
@@ -239,7 +239,7 @@ const page = () => {
       // Set initial state
       gsap.set([subtitle, description, link, countdown].filter(Boolean), {
         opacity: 0,
-        y: 100
+        y: 40
       })
       
       // Animate after page loads

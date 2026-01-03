@@ -44,6 +44,13 @@ const GamingHero = () => {
   useGSAP(()=>{
   const splitLines = new SplitText('.gaming-hero-text',{type:'lines'})
 
+  gsap.from('.gaming-hero-stars',{
+    opacity: 0,
+    duration: 1.2,
+    ease: 'power2.out',
+    delay: 0.3,
+  })
+
   gsap.from(splitLines.lines,{
     opacity: 0,
     yPercent: 60,
@@ -73,7 +80,7 @@ const GamingHero = () => {
 
   return (
     <main className='relative w-full h-screen overflow-hidden flex items-center justify-center'>
-      <StarsBackground />
+      <StarsBackground className="gaming-hero-stars" />
       <div className='hidden lg:block'>
         <BackgroundBeams />
       </div>
