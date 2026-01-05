@@ -4,6 +4,7 @@ import Lenis from '@studio-freight/lenis'
 import { useEffect } from 'react'
 import gsap from 'gsap'
 import {ScrollTrigger} from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -29,6 +30,19 @@ const page = () => {
     }
   }, [])
 
+  useGSAP(()=>{
+    gsap.fromTo('.intro',{
+      opacity:0,
+      y:20,
+    },{
+      opacity:1,
+      y:0,
+      duration:0.6,
+      delay:0.5,
+      ease:'power3.out',
+    })
+  })
+
   const config = {
     gap : 0.08,
     speed: 0.03,
@@ -45,6 +59,7 @@ const page = () => {
     {name: 'Silent Arc5', img: '/images/img-5.jpg'},
     {name: 'Silent Arc6', img: '/images/img-6.jpg'},
     {name: 'Silent Arc7', img: '/images/img-7.jpg'},
+    {name: 'Silent Arc8', img: '/images/img-8.jpg'},
   ]
 
   useEffect(() => {
@@ -250,54 +265,67 @@ const page = () => {
             transform: `translateY(${currentY}px)`,
           })
 
-          const viewportMiddle = viewportHeight / 2;
-          let closestIndex = 0;
-          let closestDistance = Infinity;
+          // Find which floating image is closest to the center of the arc
+          // The center of the arc is at t = 0.5 (the control point)
+          const centerT = 0.5;
+          let closestImageIndex = 0;
+          let closestTDistance = Infinity;
 
-          titleElements.forEach((title,index)=> {
-            const titleRect = title.getBoundingClientRect()
-            const titleCenter = titleRect.top + titleRect.height / 2;
-            const distanceFromCenter = Math.abs(titleCenter - viewportMiddle)
-
-            if(distanceFromCenter < closestDistance) {
-              closestDistance = distanceFromCenter;
-              closestIndex = index
+          // First, calculate all image positions and find the one closest to center
+          imageElements.forEach((img, index) => {
+            const baseStartProgress = index / spotlightItems.length;
+            const baseEndProgress = (index + 1) / spotlightItems.length;
+            const progressRange = baseEndProgress - baseStartProgress;
+            
+            const overlapAmount = 0.3;
+            const imageStartProgress = Math.max(0, baseStartProgress - overlapAmount * progressRange);
+            const imageEndProgress = Math.min(1, baseEndProgress + overlapAmount * progressRange);
+            
+            let t = 0;
+            if(switchProgress < imageStartProgress) {
+              // Image hasn't appeared yet - skip it
+              return;
+            } else if(switchProgress >= imageEndProgress) {
+              // Image has passed - skip it
+              return;
+            } else {
+              const progress = (switchProgress - imageStartProgress) / (imageEndProgress - imageStartProgress);
+              const speedAdjusted = progress * config.imageSpeed;
+              t = speedAdjusted + (1 - config.imageSpeed) * Math.pow(progress, 2);
             }
-          })
+            
+            // Check if this image is closest to the center (t = 0.5)
+            const tDistance = Math.abs(t - centerT);
+            if(tDistance < closestTDistance) {
+              closestTDistance = tDistance;
+              closestImageIndex = index;
+            }
+          });
 
-          // Update active title immediately
+          // Use the floating image index to determine active title and background
+          const closestIndex = closestImageIndex;
+
+          // Update active title based on floating image at center
           if(closestIndex !== currentActiveIndex){
             if(titleElements[currentActiveIndex]) {
               titleElements[currentActiveIndex].style.opacity= '0.25';
             }
-            titleElements[closestIndex].style.opacity = '1'
+            if(titleElements[closestIndex]) {
+              titleElements[closestIndex].style.opacity = '1';
+            }
           }
           
           // Update currentActiveIndex for title tracking (always update)
           currentActiveIndex = closestIndex;
           
-          // Sync background image directly with active title index
-          // This ensures all 7 images are shown and changes are synced with titles
+          // Sync background image with the floating image at center
           if(closestIndex !== currentBgIndex) {
-            const progressDiff = Math.abs(switchProgress - lastBgChangeProgress);
-            const progressPerItem = 1 / spotlightItems.length;
-            
-            // Small threshold to prevent jitter, but allow all indices to be reached
-            // Use a smaller threshold to keep it more responsive and synced
-            const threshold = progressPerItem * 0.15; // 15% of one item's progress
-            
-            // Always allow change if we've moved to a different item (index difference >= 1)
-            // This ensures we can reach all 7 images
-            if(progressDiff >= threshold || Math.abs(closestIndex - currentBgIndex) >= 1) {
-              // Ensure index is valid
-              const targetIndex = Math.max(0, Math.min(closestIndex, spotlightItems.length - 1));
-              const bgImg = document.querySelector('.spotlight-bg-img img')
-              if(bgImg) {
-                bgImg.src = spotlightItems[targetIndex].img;
-              }
-              currentBgIndex = targetIndex;
-              lastBgChangeProgress = switchProgress;
+            const targetIndex = Math.max(0, Math.min(closestIndex, spotlightItems.length - 1));
+            const bgImg = document.querySelector('.spotlight-bg-img img')
+            if(bgImg) {
+              bgImg.src = spotlightItems[targetIndex].img;
             }
+            currentBgIndex = targetIndex;
           }
 
           // Sync floating images with titles - position images along arc from top to bottom
@@ -327,13 +355,18 @@ const page = () => {
               t = 1;
             } else {
               // Map switchProgress to t (0 to 1) for this image's arc position
-              // Multiply by imageSpeed to make movement faster along the arc path
+              // imageSpeed affects how fast it moves along the path, but ensures it reaches bottom
               const progress = (switchProgress - imageStartProgress) / (imageEndProgress - imageStartProgress);
-              t = Math.min(1, progress * config.imageSpeed);
+              // Use imageSpeed to slow movement, but ensure t reaches 1 when progress reaches 1
+              // Apply easing: slower at start (imageSpeed), faster at end to reach bottom
+              const speedAdjusted = progress * config.imageSpeed;
+              // Blend between speed-adjusted and full progress to ensure completion at bottom
+              // This creates slower movement but guarantees reaching t=1 when progress=1
+              t = speedAdjusted + (1 - config.imageSpeed) * Math.pow(progress, 2);
             }
             
             const pos = getBazierPosition(t);
-            // Show image more prominently when its corresponding title is active
+            // Show image more prominently when it's at the center (closest to t=0.5)
             const isActive = index === closestIndex;
             let baseOpacity = isActive ? 1 : 0.6;
             
@@ -352,7 +385,7 @@ const page = () => {
               opacity: finalOpacity,
             })
           })
-        } 
+        }
         
         if(progress > 0.9) {
           // Fade out the entire spotlight section as we transition to outro
@@ -389,11 +422,6 @@ const page = () => {
       }
     })
 
-    return () => {
-      scrollTrigger.kill()
-      imageElements.forEach(img => img.remove())
-      titlesContainer.innerHTML = ''
-    }
   }, [])
 
   return (
@@ -404,10 +432,10 @@ const page = () => {
       <section className='spotlight'>
         <div className="spotlight-intro-text-wrapper">
           <div className="spotlight-intro-text">
-            <p>Beneath</p>
+            <p>PAST</p>
           </div>
           <div className="spotlight-intro-text">
-            <p>Beyond</p>
+            <p>FUTURE</p>
           </div>
         </div>
 
@@ -422,11 +450,11 @@ const page = () => {
         <div className="spotlight-images"></div>
 
         <div className="spotlight-header">
-          <p>Discover</p>
+          <p>Best Moments of</p>
         </div>
       </section>
       <section className='outro'>
-        <h1>Moments in still motion.</h1>
+        <h1>Make sure to visist my Steam Profile</h1>
       </section> 
       
     </main>

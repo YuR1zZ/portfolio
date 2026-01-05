@@ -32,8 +32,8 @@ const GamingMenu = () => {
 
   return (
     <>
-      {/* The small bottom menu button - KEEPING YOUR EXISTING BUTTON */}
-      <main className="absolute bottom-8 left-1/2 -translate-x-1/2 gaming-hero-menu">
+      {/* The small bottom menu button - Fixed to viewport */}
+      <div className="fixed bottom-8 left-1/2 -translate-x-1/2 gaming-hero-menu z-50">
       
         <div
           className='flex justify-end items-center h-10 w-28 bg-amber-50 rounded-3xl cursor-pointer'
@@ -45,7 +45,7 @@ const GamingMenu = () => {
             <RxHamburgerMenu />
           </div>
         </div>
-      </main>
+      </div>
 
       {/* Fullscreen popup overlay with circular menu */}
       <GamingMenuOverlay 

@@ -27,7 +27,7 @@ const GamingHeader = () => {
 
   return (
     <div className={`flex w-full h-[60px] justify-center items-center text-[#EEEEEE] fixed top-0 z-[10] p-4 transition-all duration-300
-      ${isScrolled ? "backdrop-blur-md bg-[#111111]/40 rounded-3xl px-10 max-sm:px-4 max-md:px-4" : "bg-transparent px-4"}
+      ${isScrolled ? "rounded-3xl px-10 max-sm:px-4 max-md:px-4" : "px-4"}
       `}>
       
         <Magnet>
