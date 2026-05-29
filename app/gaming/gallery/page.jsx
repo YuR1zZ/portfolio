@@ -52,14 +52,14 @@ const page = () => {
   }
 
   const spotlightItems = [
-    {name: 'Silent Arc', img: '/images/img-1.jpg'},
-    {name: 'Silent Arc2', img: '/images/img-2.jpg'},
-    {name: 'Silent Arc3', img: '/images/img-3.jpg'},
-    {name: 'Silent Arc4', img: '/images/img-4.jpg'},
-    {name: 'Silent Arc5', img: '/images/img-5.jpg'},
-    {name: 'Silent Arc6', img: '/images/img-6.jpg'},
-    {name: 'Silent Arc7', img: '/images/img-7.jpg'},
-    {name: 'Silent Arc8', img: '/images/img-8.jpg'},
+    {name: 'Elden Ring', img: '/images/img-1.jpg'},
+    {name: 'Hogwarts Legacy', img: '/images/img-2.jpg'},
+    {name: 'Witcher 3', img: '/images/img-3.jpg'},
+    {name: 'Ghost of Tsushima', img: '/images/img-4.jpg'},
+    {name: 'Call of Duty Warzone', img: '/images/img-5.jpg'},
+    {name: 'Counter Strike 2', img: '/images/img-6.jpg'},
+    {name: 'Battlefield 1', img: '/images/img-7.jpg'},
+    {name: 'Dark Souls 3', img: '/images/img-8.jpg'},
   ]
 
   useEffect(() => {
@@ -455,6 +455,10 @@ const page = () => {
       </section>
       <section className='outro'>
         <h1>Make sure to visist my Steam Profile</h1>
+
+        <div className="bottom-0 items-center justify-center">
+              <a href="https://steamcommunity.com/id/Iam_MAGNET/" target="_blank" rel="noopener noreferrer">Steam Profile</a>
+        </div>
       </section> 
       
     </main>
