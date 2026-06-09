@@ -52,14 +52,14 @@ const page = () => {
   }
 
   const spotlightItems = [
-    {name: 'Elden Ring', img: '/images/img-1.jpg'},
-    {name: 'Hogwarts Legacy', img: '/images/img-2.jpg'},
-    {name: 'Witcher 3', img: '/images/img-3.jpg'},
-    {name: 'Ghost of Tsushima', img: '/images/img-4.jpg'},
-    {name: 'Call of Duty Warzone', img: '/images/img-5.jpg'},
-    {name: 'Counter Strike 2', img: '/images/img-6.jpg'},
-    {name: 'Battlefield 1', img: '/images/img-7.jpg'},
-    {name: 'Dark Souls 3', img: '/images/img-8.jpg'},
+    {name: 'Elden Ring', img: '/images/elden-ring.jpg'},
+    {name: 'Hogwarts Legacy', img: '/images/hogwarts.jpg'},
+    {name: 'Witcher 3', img: '/images/witcher.jpg'},
+    {name: 'Ghost of Tsushima', img: '/images/got.jpg'},
+    {name: 'Call of Duty Warzone', img: '/images/warzone.jpg'},
+    {name: 'Counter Strike 2', img: '/images/cs2.jpg'},
+    {name: 'Battlefield 1', img: '/images/bf1.jpg'},
+    {name: 'Dark Souls 3', img: '/images/ds3.jpg'},
   ]
 
   useEffect(() => {
