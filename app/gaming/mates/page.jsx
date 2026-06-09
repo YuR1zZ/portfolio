@@ -48,7 +48,7 @@ const page = () => {
       a.href = slideData.slideUrl
       a.target = '_blank'
       a.rel = 'noopener noreferrer'
-      a.textContent = 'Steam Profile'
+      a.textContent = 'Steam'
       slideLink.appendChild(a);
 
       slideHeader.appendChild(slideTitle);
@@ -274,7 +274,7 @@ const page = () => {
               <p>05</p>
             </div>
             <div className="slide-link">
-              <a href="https://steamcommunity.com/id/Iam_MAGNET/" target="_blank" rel="noopener noreferrer">Steam Profile</a>
+              <a href="https://steamcommunity.com/id/Iam_MAGNET/" target="_blank" rel="noopener noreferrer">Steam</a>
             </div>
           </div>
         </div>
