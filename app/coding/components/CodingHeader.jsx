@@ -37,7 +37,9 @@ const CodingHeader = () => {
             href="/"
             className="relative text-[#EEEEEE] font-medium overflow-hidden"
           >
-            <span className="underline-text relative z-10">MohammadPanahi</span>
+            <span className="hidden md:inline">MohammadPanahi</span>
+            <span className="md:hidden">MP</span>
+            
             <span className="underline absolute left-1/2 -translate-x-1/2 bottom-0 w-0 h-[1px] bg-[#EEEEEE]"></span>
           </Link>
         </Magnet>
