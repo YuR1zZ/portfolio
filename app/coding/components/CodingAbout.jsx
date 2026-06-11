@@ -72,7 +72,7 @@ const CodingIntroduction2 = ()=> {
     let body = [];
     phrase.split(" ").forEach( (word, i) => {
       const letters = splitLetters(word);
-      body.push(<p key={word + "_" + i} className='m-0 mr-[1.3vw] text-[64px] leading-[1.1]'>{letters}</p>)
+      body.push(<p key={word + "_" + i} className='m-0 mr-[1.3vw] text-[55px] max-md:text-[30px] leading-[1.1]'>{letters}</p>)
     })
     return body
   }
