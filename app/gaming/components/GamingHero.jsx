@@ -90,7 +90,7 @@ const GamingHero = () => {
   
     <div className='absolute flex items-center justify-center h-full w-full'>
 
-    <div className="absolute hidden h-full left-0 top-0 2xl:w-[55rem] xl:w-[50rem] lg:w-[50rem] -translate-y-50 lg:block pointer-event-none gaming-hero-spaceship">
+    <div className="absolute hidden h-full left-0 top-0 2xl:w-[55rem] xl:w-[50rem] lg:w-[50rem] md:w-[50rem] -translate-y-50 sm:block pointer-event-none gaming-hero-spaceship">
     <Canvas camera={{ position: [-90, 80, 100], fov: 50 }}>
       <ambientLight intensity={1} />
       <directionalLight position={[5, 5, 5]} intensity={1} />
@@ -106,7 +106,7 @@ const GamingHero = () => {
   <h1 className='text-4xl mb-10 gaming-text text-center gaming-hero-title uppercase'>
     To the Infinity and Beyond
   </h1>
-    <p className="text-center text-2xl gaming-hero-text">
+    <p className="text-center p-10 text-2xl max-md:text-lg max-sm:text-lg max-sm:pl-20 max-sm:pr-20 gaming-hero-text">
       Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus modi tenetur eum reiciendis earum assumenda doloribus repudiandae asperiores.
     </p>
   </div>
