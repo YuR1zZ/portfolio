@@ -35,7 +35,7 @@ export default function Home() {
     },{
       opacity:1,
       y:0,
-      duration:0.6,
+      duration:1,
       delay:0.6,
       ease:'power3.out',
     })
@@ -45,7 +45,7 @@ export default function Home() {
     },{
       opacity:1,
       y:0,
-      duration:0.7,
+      duration:1,
       delay:0.3,
       ease:'power3.out',
     })
@@ -55,7 +55,17 @@ export default function Home() {
     },{
       opacity:1,
       y:0,
-      duration:0.7,
+      duration:1,
+      ease:'power3.out',
+    })
+    gsap.fromTo('.attention',{
+      opacity:0,
+      y:15,
+    },{
+      delay:1,
+      opacity:0.6,
+      y:0,
+      duration:1,
       ease:'power3.out',
     })
   },[])
@@ -85,12 +95,10 @@ export default function Home() {
 
     <div className="absolute flex flex-col items-center justify-center z-20">
       <div className="text-5xl mb-7 welcome">
-    <h1 className="bg-gradient-to-b from-gray-600 to-white bg-clip-text text-transparent uppercase text-center leading-none font-thin
-  ">Welcome</h1>
+    <h1 className="bg-gradient-to-b from-gray-600 to-white bg-clip-text text-transparent uppercase text-center leading-none font-thin">Welcome</h1>
     </div>
     <div className="mb-4 text-3xl path">
-      <p className="bg-gradient-to-b from-gray-600 to-white bg-clip-text text-transparent uppercase text-center leading-none font-thin
-">Please Choose Your Path</p>
+      <p className="bg-gradient-to-b from-gray-600 to-white  bg-clip-text text-transparent text-center leading-[2.4rem] font-thin">Please Choose Your Path</p>
     </div>
 
     <div className="flex flex-row gap-8 mt-15 text-xl">
@@ -113,7 +121,17 @@ export default function Home() {
         </Link>
       </Magnet>
 
+
     </div>
+
+    <div className="fixed inset-x-0 bottom-10 p-6 flex items-center justify-center text-center overflow-hidden text-sm opacity-60 bg-black attention">
+  <p>
+    ⚠️ for Better Experience Use Large Screens
+  </p>
+</div>
+
+
+      
     </div>
 
     </div>
