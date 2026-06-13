@@ -16,9 +16,9 @@ const page = () => {
     gsap.from(splitLines.lines, {
       opacity: 0,
       yPercent: 60,
-      duration: 0.7,
+      duration: 0.5,
       stagger: 0.06,
-      delay: 1,
+      delay: 0.5,
     })
   }, [])
 

@@ -435,7 +435,7 @@ const page = () => {
             <p>PAST</p>
           </div>
           <div className="spotlight-intro-text">
-            <p>FUTURE</p>
+            <p>MEMORIES</p>
           </div>
         </div>
 

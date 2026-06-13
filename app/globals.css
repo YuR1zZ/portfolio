@@ -1121,11 +1121,12 @@ section.outro:not(.whoami-container) p {
     top: 50%;
     transform: translateY(-50%);
     display: flex;
+    justify-content: center;
     gap: 0.5rem;
 }
 
 .spotlight-intro-text {
-    flex: 1;
+    flex: unset;
     position: relative;
     will-change: transform;
     color: #ffffff;
@@ -1219,7 +1220,7 @@ section.outro:not(.whoami-container) p {
     color: #ffffff;
     opacity: 0.3;
     transition: opacity 0.3s ease;
-    font-size: 5rem;
+    font-size: 3rem !important;
     font-weight: 300;
     letter-spacing: -0.02em;
     text-transform: uppercase;
