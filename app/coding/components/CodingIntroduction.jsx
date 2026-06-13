@@ -31,7 +31,7 @@ const CodingIntroduction = () => {
       {/* 3. Only render the mask if isDesktop is true */}
       {isDesktop && (
         <motion.div 
-          className='mask'
+          className='mask text-center text-[64px] max-lg:text-[54px] max-md:text-[45px]'
           animate={{
             WebkitMaskPosition: `${x - (size/2)}px ${y - (size/2)}px`,
             WebkitMaskSize: `${size}px`,
@@ -48,7 +48,7 @@ const CodingIntroduction = () => {
         </motion.div>
       )}
 
-      <div className='content text-center'>
+      <div className='content text-center text-[64px] max-lg:text-[54px] max-md:text-[45px]'>
         <p>I'm a <span className="coding-text">selectively skilled</span> product designer with strong focus on producing high quality & impactful digital experience.</p>
       </div>
     </main>

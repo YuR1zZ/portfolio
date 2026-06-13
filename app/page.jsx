@@ -126,7 +126,7 @@ export default function Home() {
 
     <div className="fixed inset-x-0 bottom-10 p-6 flex items-center justify-center text-center overflow-hidden text-sm opacity-60 attention">
   <p>
-    ⚠️ for Better Experience Use Larger Screens
+    ⚠️ for Better Experience Please Use Larger Screens
   </p>
 </div>
 
