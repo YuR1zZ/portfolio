@@ -64,7 +64,7 @@ const CodingHero = () => {
       ]}
     />
 
-  <div className="relative scale-[0.6] rotate-[40deg] pointer-events-none animate-bounce-slow z-10 -translate-y-60 sm:-translate-y-60 md:-translate-y-60 lg:-translate-y-60 xl:-translate-y-60 planet">
+  <div className="relative scale-[0.6] rotate-40 pointer-events-none animate-bounce-slow z-10 -translate-y-60 sm:-translate-y-60 md:-translate-y-60 lg:-translate-y-60 xl:-translate-y-60 planet">
     <PlanetSketch />
     </div>
 

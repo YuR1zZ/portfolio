@@ -36,8 +36,8 @@ const Page = () => {
     () => {
       gsap.from('.gaming-about-title', {
         opacity: 0,
-        y: 30,
-        duration: 0.8,
+        y: 40,
+        duration: 1,
         ease: 'power3.out',
       })
 
@@ -114,7 +114,7 @@ const Page = () => {
   return (
     <div ref={containerRef}>
       <section className="gaming-about-hero">
-        <h1 className="gaming-about-title">
+        <h1 className="gaming-about-title gaming-text">
           Gaming is Life
         </h1>
       </section>
