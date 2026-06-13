@@ -1238,6 +1238,11 @@ section.outro:not(.whoami-container) p {
     pointer-events: none;
     overflow: visible;
 }
+@media (max-width: 768px) {
+  .spotlight-images {
+    display: none;
+  }
+}
 
 .spotlight-img {
     position: absolute;
