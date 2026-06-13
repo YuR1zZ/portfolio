@@ -1353,6 +1353,11 @@ section.outro:not(.whoami-container) p {
   white-space: pre-line;
 }
 
+.gaming-about-text .line {
+  overflow: hidden;
+  display: block;
+}
+
 /* Mobile tweaks */
 @media (max-width: 768px) {
   .gaming-about-section {

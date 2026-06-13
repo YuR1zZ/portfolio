@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import ScrollTrigger from 'gsap/ScrollTrigger'
@@ -10,6 +10,8 @@ import Lenis from '@studio-freight/lenis'
 gsap.registerPlugin(ScrollTrigger, SplitText)
 
 const Page = () => {
+  const containerRef = useRef(null)
+
   useEffect(() => {
     const lenis = new Lenis({
       smoothWheel: true,
@@ -30,54 +32,87 @@ const Page = () => {
     }
   }, [])
 
-  useGSAP(() => {
-    const isMobile = window.innerWidth < 768
-
-    gsap.from('.gaming-about-title', {
-      opacity: 0,
-      y: 30,
-      duration: 0.8,
-      ease: 'power3.out',
-    })
-
-    if (!isMobile) {
-      const split = new SplitText('.gaming-about-text', {
-        type: 'lines',
-        linesClass: 'line',
-      })
-
-      gsap.from(split.lines, {
-        yPercent: 80,
+  useGSAP(
+    () => {
+      gsap.from('.gaming-about-title', {
         opacity: 0,
-        stagger: 0.08,
+        y: 30,
         duration: 0.8,
-        ease: 'power4.out',
-        scrollTrigger: {
-          trigger: '.gaming-about-text',
-          start: 'top 80%',
-          once: true,
-        },
+        ease: 'power3.out',
       })
 
-      return () => {
-        split.revert()
-      }
-    } else {
-      gsap.from('.gaming-about-text', {
-        opacity: 0,
-        y: 40,
-        duration: 0.8,
-        scrollTrigger: {
-          trigger: '.gaming-about-text',
-          start: 'top 85%',
-          once: true,
-        },
+      const mm = gsap.matchMedia()
+
+      mm.add('(min-width: 768px)', () => {
+        let split = null
+        let tween = null
+
+        const setupSplit = () => {
+          tween?.scrollTrigger?.kill()
+          tween?.kill()
+          split?.revert()
+
+          split = new SplitText('.gaming-about-text', {
+            type: 'lines',
+            linesClass: 'line',
+          })
+
+          tween = gsap.from(split.lines, {
+            yPercent: 100,
+            opacity: 0,
+            stagger: 0.08,
+            duration: 0.8,
+            ease: 'power4.out',
+            scrollTrigger: {
+              trigger: '.gaming-about-content',
+              start: 'top 80%',
+              once: true,
+            },
+          })
+
+          ScrollTrigger.refresh()
+        }
+
+        setupSplit()
+
+        let resizeTimer
+        const onResize = () => {
+          clearTimeout(resizeTimer)
+          resizeTimer = setTimeout(setupSplit, 200)
+        }
+
+        window.addEventListener('resize', onResize)
+        document.fonts?.ready?.then(() => ScrollTrigger.refresh())
+
+        return () => {
+          clearTimeout(resizeTimer)
+          window.removeEventListener('resize', onResize)
+          tween?.scrollTrigger?.kill()
+          tween?.kill()
+          split?.revert()
+        }
       })
-    }
-  }, [])
+
+      mm.add('(max-width: 767px)', () => {
+        gsap.from('.gaming-about-text', {
+          opacity: 0,
+          y: 40,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: '.gaming-about-content',
+            start: 'top 85%',
+            once: true,
+          },
+        })
+      })
+
+      return () => mm.revert()
+    },
+    { scope: containerRef }
+  )
 
   return (
-    <div>
+    <div ref={containerRef}>
       <section className="gaming-about-hero">
         <h1 className="gaming-about-title">
           Gaming is Life
