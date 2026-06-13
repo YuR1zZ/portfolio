@@ -106,8 +106,8 @@ const GamingHero = () => {
   <h1 className='text-4xl mb-10 gaming-text text-center gaming-hero-title uppercase'>
     To the Infinity and Beyond
   </h1>
-    <p className="text-center p-10 text-2xl max-md:text-lg max-sm:text-lg max-sm:pl-20 max-sm:pr-20 gaming-hero-text">
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus modi tenetur eum reiciendis earum assumenda doloribus repudiandae asperiores.
+    <p className="text-center p-10 text-2xl max-md:text-lg max-sm:text-lg max-sm:pl-20 max-sm:pr-20 gaming-hero-text uppercase">
+      Step into fractured worlds where legends are forged in combat and silence speaks louder than dialogue every victory carved through chaos.
     </p>
   </div>
 
