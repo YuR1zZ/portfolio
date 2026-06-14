@@ -8,7 +8,7 @@ import SpotLight from '../../components/ui/SpotLight';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const phrase = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.";
+const phrase = "For the last three years, I've been turning ideas into projects, constantly improving my development skills. My expertise lies in frontend development, complemented by experience building and integrating backend solutions.";
 
 const CodingIntroduction2 = ()=> {
 
