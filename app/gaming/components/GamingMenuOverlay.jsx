@@ -499,8 +499,8 @@ const initCenterDrag = ()=> {
           <div className="close-btn-bar"></div>
         </div>
         <div className="menu-overlay-items">
-          <a href='#'><ion-icon name='logo-discord'></ion-icon></a>
-          <a href='#'><ion-icon name='logo-github'></ion-icon></a>
+          <a href='https://discord.com/channels/@yur1ishere' target="_blank"><ion-icon name='logo-discord'></ion-icon></a>
+          <a href='https://github.com/YuR1zZ' target="_blank"><ion-icon name='logo-github'></ion-icon></a>
           <a href='https://steamcommunity.com/id/YuR1isHere/' target="_blank"><ion-icon name='logo-steam'></ion-icon></a>
         </div>
       </div>
