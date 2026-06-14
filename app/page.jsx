@@ -95,10 +95,10 @@ export default function Home() {
 
     <div className="absolute flex flex-col items-center justify-center z-20">
       <div className="text-5xl mb-7 welcome">
-    <h1 className="bg-gradient-to-b from-gray-600 to-white bg-clip-text text-transparent uppercase text-center leading-none font-thin">Welcome</h1>
+    <h1 className="bg-linear-to-b from-gray-600 to-white bg-clip-text text-transparent uppercase text-center leading-none font-thin">Welcome</h1>
     </div>
     <div className="mb-4 text-3xl path">
-      <p className="bg-gradient-to-b from-gray-600 to-white  bg-clip-text text-transparent text-center leading-[2.4rem] font-thin">Please Choose Your Path</p>
+      <p className="bg-linear-to-b from-gray-600 to-white  bg-clip-text text-transparent text-center leading-[2.4rem] font-thin">Please Choose Your Path</p>
     </div>
 
     <div className="flex flex-row gap-8 mt-15 text-xl">
