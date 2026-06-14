@@ -75,7 +75,7 @@ const CodingHero = () => {
     <h1 className="text-4xl coding-text font-thin">
       i create good stuff
     </h1>
-    <Button>
+    <Button href="mailto:panahim257@gmail.com">
       Get it Touch
     </Button>
   </div>
