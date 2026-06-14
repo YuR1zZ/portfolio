@@ -105,7 +105,7 @@ const CodingFooter = () => {
       <div className="flex flex-row gap-5 mt-10">
         <Magnet>
       <button
-        onClick={() => window.open("https://instagram.com/yourprofile", "_blank")}
+        onClick={() => window.open("https://www.instagram.com/mmd_panahii/", "_blank")}
         className="text-[#EEEEEE] font-medium overflow-hidden relative"
       >
         <span className="underline-text relative z-10">Instagram</span>
@@ -116,7 +116,7 @@ const CodingFooter = () => {
 
     <Magnet>
       <button
-        onClick={() => window.open("https://instagram.com/yourprofile", "_blank")}
+        onClick={() => window.open("https://www.linkedin.com/in/mohammad-panahi-8278b011b/", "_blank")}
         className="text-[#EEEEEE] font-medium overflow-hidden relative"
       >
         <span className="underline-text relative z-10">Linkedin</span>
@@ -127,7 +127,7 @@ const CodingFooter = () => {
 
     <Magnet>
       <button
-        onClick={() => window.open("https://instagram.com/yourprofile", "_blank")}
+        onClick={() => window.open("https://github.com/YuR1zZ", "_blank")}
         className="text-[#EEEEEE] font-medium overflow-hidden relative"
       >
         <span className="underline-text relative z-10">Github</span>
@@ -138,10 +138,10 @@ const CodingFooter = () => {
 
     <Magnet>
       <button
-        onClick={() => window.open("https://instagram.com/yourprofile", "_blank")}
+        onClick={() => window.open("https://web.facebook.com/mohammad.panahi.7374", "_blank")}
         className="text-[#EEEEEE] font-medium overflow-hidden relative"
       >
-        <span className="underline-text relative z-10">Telegram</span>
+        <span className="underline-text relative z-10">Facebook</span>
         <span className="underline absolute left-1/2 -translate-x-1/2 bottom-0 w-0 h-[1px] bg-[#EEEEEE]"></span>
       </button>
     </Magnet>

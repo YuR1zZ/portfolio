@@ -86,7 +86,7 @@ const CodingIntroduction2 = ()=> {
   }
 
   return (
-    <main ref={container} className='flex flex-col h-screen text-[#EEEEEE] p-[40px] items-center justify-center overflow-hidden lg:px-[15vw] xl:px-[20vw] md:px-[3vw] sm:px-[1vw] relative'>
+    <main ref={container} className='flex flex-col h-screen text-[#EEEEEE] p-10 items-center justify-center overflow-hidden lg:px-[15vw] xl:px-[20vw] md:px-[3vw] sm:px-[1vw] relative'>
 
       <SpotLight
         lights={[
