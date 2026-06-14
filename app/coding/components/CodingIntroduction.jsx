@@ -43,13 +43,13 @@ const CodingIntroduction = () => {
               onMouseEnter={() => setIsHovered(true)} 
               onMouseLeave={() => setIsHovered(false)}
             >
-              A visual designer - with skills that haven't been replaced by A.I (yet) - making good shit only if the paycheck is equally good.
+              A developer with skills that already replaced by AI. turnig working projects into serious complex problems. gimme a farm im done with this shii.
             </p>
         </motion.div>
       )}
 
       <div className='content text-center text-[64px] max-lg:text-[54px] max-md:text-[45px]'>
-        <p>I'm a <span className="coding-text">selectively skilled</span> product designer with strong focus on producing high quality & impactful digital experience.</p>
+        <p>I'm a <span className="coding-text">software developer</span> dedicated to turning complex problems into efficient, high-quality digital solutions with lasting value.</p>
       </div>
     </main>
   )
