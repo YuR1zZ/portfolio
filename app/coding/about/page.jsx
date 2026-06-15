@@ -6,7 +6,7 @@ import SpotLight from '../../components/ui/SpotLight';
 
 
 
-const phrase = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.";
+const phrase = "For the last three years, I've been turning ideas into projects, constantly improving my development skills. My expertise lies in frontend development, complemented by experience building and integrating backend solutions.";
 
 const About = ()=> {
 
@@ -20,7 +20,7 @@ const About = ()=> {
       />
         
         
-      <div className='flex flex-wrap items-center justify-center m-0 mr-[1.3vw] text-[64px] leading-[1.1]'>
+      <div className='flex flex-wrap items-center justify-center m-0 mr-[1.3vw] text-[58px] max-xl:text-[55px] max-lg:text-[50px] max-md:text-[45px] max-sm:text-[30px] leading-[1.1]'>
         {
           phrase
         }

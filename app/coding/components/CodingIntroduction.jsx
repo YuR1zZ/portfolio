@@ -43,7 +43,7 @@ const CodingIntroduction = () => {
               onMouseEnter={() => setIsHovered(true)} 
               onMouseLeave={() => setIsHovered(false)}
             >
-              A developer with skills that already replaced by AI. turning working projects into serious complex problems. gimme a farm im done with this shii.
+              A random developer with bounch of skills that already replaced by AI. turning working projects into serious complex problems. gimme a farm im done with this shii.
             </p>
         </motion.div>
       )}
