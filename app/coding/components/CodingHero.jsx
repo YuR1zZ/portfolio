@@ -76,7 +76,7 @@ const CodingHero = () => {
       i create good stuff
     </h1>
     <Button href="mailto:panahim257@gmail.com">
-      Get it Touch
+      Get in Touch
     </Button>
   </div>
 </div>
