@@ -454,7 +454,7 @@ const page = () => {
         </div>
       </section>
       <section className='outro'>
-        <h1>Make sure to visist my Steam Profile</h1>
+        <h1>Make sure to visit my Steam Profile</h1>
 
         <div>
               <a href="https://steamcommunity.com/id/YuR1isHere/" target="_blank" rel="noopener noreferrer" className='text-xl'>Steam Profile</a>

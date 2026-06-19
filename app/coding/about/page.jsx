@@ -11,7 +11,7 @@ const phrase = "For the last three years, I've been turning ideas into projects,
 const About = ()=> {
 
   return (
-    <main className='flex h-screen text-[#EEEEEE] p-[40px] items-center justify-center overflow-hidden lg:px-[15vw] xl:px-[20vw] md:px-[3vw] sm:px-[1vw] relative text-center'>
+    <main className='flex h-screen text-[#EEEEEE] p-[40px] items-center justify-center overflow-hidden lg:px-[15vw] xl:px-[20vw] md:px-[3vw] sm:px-[1vw] relative text-center pointer-events-none'>
 
       <SpotLight
         lights={[

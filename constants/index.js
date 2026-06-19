@@ -9,8 +9,8 @@ const slides = [
     },
     {
         slideTitle: 'Majid shokri',
-        subTitle: 'the Real Trol',
-        slideDescription:"bro is literally playing for other team. mouse in hand but locking in in cooldown , Throwing matches like a ball except no one's playing with you after. most random thing is that he's planting opium.",
+        subTitle: 'the Real Troll',
+        slideDescription:"bro is literally playing for other team. mouse in hand but locking in is in cooldown , Throwing matches like a ball except no one's playing with you after. most random thing is that he's planting opium.",
         slideUrl:'https://steamcommunity.com/id/MajidShokri',
         
     
